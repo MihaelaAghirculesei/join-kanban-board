@@ -15,8 +15,7 @@
   </div>
   <div class="form-div">
     <a href="#"
-    ><img src="../../../../assets/img/addContactOverlay/X.svg" alt="" (click)="toggleOverlay()"
-  /></a>
+    ><img src="../../../../assets/img/addContactOverlay/X.svg" alt="" (click)="toggleOverlay(); clearForm()"   /></a>
     <div class="form-wrapper">
       <div class="input-div">
         <img src="../../../../assets/img/addContactOverlay/person.svg" alt="search" />
@@ -64,11 +63,11 @@
         />
       </div>
       <div class="button-div">
-        <button class="cancel-button" (click)="toggleOverlay()">
+        <button class="cancel-button" (click)="toggleOverlay(); clearForm()">
           Cancel
           <img src="../../../../assets/img/addContactOverlay/X.svg" alt="" />
         </button>
-        <button class="create-button"[disabled]="!isFormValid()">Create Contact</button>
+        <button class="create-button"[disabled]="!isFormValid()" (click)="this.contactService.addContact(contactData); toggleOverlay(); clearForm()">Create Contact <img src="../../../../assets/img/addContactOverlay/check.svg" alt=""></button>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy} from '@angular/core';
 import { inject } from '@angular/core';
 import { Firestore, collectionData, collection, doc, onSnapshot, addDoc} from '@angular/fire/firestore';
 import { Contact } from '../interfaces/contact';
@@ -8,7 +8,7 @@ import { query, orderBy, limit } from 'firebase/firestore';
 @Injectable({
   providedIn: 'root'
 })
-export class ContactService {
+export class ContactService implements OnDestroy{
   unsubContactList: any;
   firestore:Firestore = inject(Firestore);
   /* contacts  = collectionData(this.getContactsRef()); */
@@ -33,13 +33,12 @@ export class ContactService {
 
   checkContactListLaters(){
     let latter = 0;
-    
+    this.contactListLater= [];
     let condition = true;
     let startValue = 0;
     this.contactList.forEach(contact =>{
       while (condition) {
         if(contact.name.startsWith(String.fromCharCode(latter + 65))){
-          this.contactListLaters[latter] = startValue + 1 ;
           if(!this.contactListLater.includes(String.fromCharCode(latter + 65)))
           this.contactListLater.push(String.fromCharCode(latter + 65))
           condition = false;
@@ -59,8 +58,10 @@ export class ContactService {
 
   }
 
-  ngonDestroy(){
-    this.unsubContactList();
+  ngOnDestroy(){
+    if(this.unsubContactList()){
+      this.unsubContactList();
+    }
   }
 
   async addContact(item:any){

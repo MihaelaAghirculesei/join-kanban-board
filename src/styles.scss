@@ -3,10 +3,6 @@
 @import './app/styles/mixins.scss';
 @import './app/styles/buttons.scss';
 
-/* You can add global styles to this file, and also import other style files */
-*{
-  margin: 0;
-}
 
 * {
   margin: 0;
@@ -15,6 +11,10 @@
   scroll-behavior: smooth;
   font-family: 'Inter', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.no-scroll {
+  overflow: hidden;
+}
+
 
 a {
   text-decoration: none;
