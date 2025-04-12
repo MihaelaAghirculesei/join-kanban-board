@@ -1,47 +1,45 @@
-<div class="navbar">
-  <!-- <img
-    class="mobile-logo"
-    src="./../../../../assets/img/header/join-logo-mobile.svg"
-    alt="JOIN Logo"
-  /> -->
-  <span class="navbar-title">Kanban Project Management Tool</span>
+<header class="header">
+  <div class="header-content">
+    <img
+      class="mobile-logo"
+      src="./assets/img/header/join-logo-mobile.svg"
+      alt="Mobile Logo"
+    />
 
-  <div class="profile-container">
-    <a href="./help/help.component.html">
-      <img
-        class="help-img"
-        src="./../../../../assets/img/header/help.svg"
-        alt="Help"
-      />
-    </a>
-    <div class="profile" id="profile-button" (click)="toggleSubMenu($event)">
-      <span>G</span><span></span>
+    <h1 class="header-title">Kanban Project Management Tool</h1>
+  </div>
+
+  <div class="profile-section">
+    <img
+      class="help-icon"
+      src="./assets/img/header/help.svg"
+      alt="Help Icon"
+      (click)="navigateToHelp()"
+    />
+
+    <div class="profile" (click)="toggleMenu($event)">G</div>
+
+    <div class="dropdown-menu" [class.active]="showMenu">
+      <a
+        class="menu-item"
+        (click)="handleMenuItemClick('legal-notice'); $event.stopPropagation()"
+      >
+        Legal Notice
+      </a>
+      <a
+        class="menu-item"
+        (click)="
+          handleMenuItemClick('privacy-policy'); $event.stopPropagation()
+        "
+      >
+        Privacy Policy
+      </a>
+      <a
+        class="menu-item"
+        (click)="handleMenuItemClick('logout'); $event.stopPropagation()"
+      >
+        Logout
+      </a>
     </div>
   </div>
-  <div>
-    <div
-      class="sub-menu"
-      [class.hidden]="!showSubMenu"
-      (click)="onSubMenuClick($event)"
-    >
-      <div class="sub-menu-choice">
-        <a href="./legal-notice/legal-notice.component.html">Legal Notice</a>
-      </div>
-
-      <div class="sub-menu-choice">
-        <a href="./privacy-policy/privacy-policy.component.html"
-          >Privacy Policy</a
-        >
-      </div>
-
-      <div class="sub-menu-choice">
-        <a href="#" (click)="logoutCurrentUser()">Logout</a>
-      </div>
-    </div>
-    <div
-      class="overlay"
-      [class.hidden]="!showSubMenu"
-      (click)="closeSubMenu()"
-    ></div>
-  </div>
-</div>
+</header>

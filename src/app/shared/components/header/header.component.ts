@@ -1,31 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss'],
 })
+export class HeaderComponent implements OnDestroy {
+  showMenu = false;
 
-export class HeaderComponent {
- showSubMenu = false;
-
-  toggleSubMenu(event: MouseEvent) {
-    event.stopPropagation(); // Verhindert, dass der Klick auch im "overlay" landet
-    this.showSubMenu = !this.showSubMenu;
+  constructor(private router: Router) {
+    document.addEventListener('click', this.onDocumentClick.bind(this));
   }
 
-  closeSubMenu() {
-    this.showSubMenu = false;
+  ngOnDestroy() {
+    document.removeEventListener('click', this.onDocumentClick.bind(this));
   }
 
-  onSubMenuClick(event: MouseEvent) {
-    event.stopPropagation(); // Klicks im Sub-Menü sollen es nicht schließen
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.profile-section')) {
+      this.closeMenu();
+    }
   }
 
-  logoutCurrentUser() {
-    console.log("User logged out");
-    this.closeSubMenu();
+  toggleMenu(event: MouseEvent) {
+    event.stopPropagation();
+    this.showMenu = !this.showMenu;
+  }
+
+  closeMenu() {
+    this.showMenu = false;
+  }
+
+  handleMenuItemClick(action: string) {
+    switch (action) {
+      case 'legal-notice':
+        this.router.navigate(['/legal-notice']);
+        break;
+      case 'privacy-policy':
+        this.router.navigate(['/privacy-policy']);
+        break;
+      case 'logout':
+        this.logout();
+        break;
+    }
+    this.closeMenu();
+  }
+
+  logout() {
+    console.log('Logout erfolgreich');
+    this.router.navigate(['/login']); // zu anpassen an Logout-Route
+  }
+
+  navigateToHelp() {
+    this.router.navigate(['/help']);
   }
 }
