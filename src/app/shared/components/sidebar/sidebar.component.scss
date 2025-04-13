@@ -1,7 +1,7 @@
 :host{
   display: flex;
-  justify-content: flex-start;
   height: 100vh;
+  justify-content: flex-start
 }
 
 .sidebar {
@@ -36,19 +36,21 @@
     font-size: 16px;
     box-sizing: border-box;
     transition: background 0.3s;
-
+  
     &.active {
-      background-color: #091931;
+      background-color: #091931 !important;
+      pointer-events: none; 
     }
 
-    &:hover {
-      background-color: #2a3d59;
+    &:not(.active):hover {
+      background-color: #2A3D59;
       cursor: pointer;
     }
-
+  
     img {
       width: 30px;
       height: 30px;
     }
   }
+  
 }
