@@ -1,0 +1,131 @@
+// help.component.scss
+
+/* Tabellenstile */
+th {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  td {
+    padding-bottom: 24px;
+    padding-left: 24px;
+  }
+  
+  /* Nummern in der Tabelle */
+  .number {
+    font-size: 26px;
+  }
+  
+  /* Tabellenüberschriften */
+  .tableHeader {
+    margin: 0;
+  }
+  
+  /* Hauptinhalt */
+  .helpContent {
+    padding-left: 100px;
+    max-width: 1340px;
+    overflow-y: auto;
+  
+    /* Responsive Anpassungen */
+    @media (max-width: 768px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  
+  /* Überschrift-Bereich */
+  .helpHeadline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    
+    img {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+  
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  
+    /* Mobile Anpassungen */
+    @media (max-width: 480px) {
+      flex-direction: column;
+      text-align: center;
+      
+      img {
+        margin-top: 15px;
+      }
+    }
+  }
+  
+  /* Zusätzliche Verbesserungen */
+  .container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .content-wrapper {
+    flex-grow: 1;
+    overflow: hidden;
+  }
+  
+  .sidebar {
+    /* Füge hier deine Sidebar-Styles hinzu */
+    width: 250px;
+    position: fixed;
+    left: 0;
+    height: 100vh;
+  }
+  
+  .header {
+    /* Füge hier deine Header-Styles hinzu */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+
+
+
+
+
+
+
+
+// th {
+//     text-align: left;
+//     font-size: 16px;
+//     font-weight: 400;
+// }
+
+// td {
+//     padding-bottom: 24px;
+//     padding-left: 24px;
+// }
+
+// .number {
+//     font-size: 26px;
+// }
+
+// .tableHeader {
+//     margin: 0px;
+// }
+
+// .helpContent {
+//     padding-left: 100px;
+//     max-width: 1340px;
+//     overflow-y: auto;
+
+// }
+
+// .helpHeadline {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: 0 5%;
+
+// }

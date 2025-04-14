@@ -55,7 +55,11 @@ export class HeaderComponent implements OnDestroy {
     this.router.navigate(['/login']); // zu anpassen an Logout-Route
   }
 
-  navigateToHelp() {
+  navigateToHelp(event: MouseEvent) {
+    event.stopPropagation();
+    console.log('Help-Icon geklickt');
+    this.router.navigate(['/help']);
+    console.log('Help-Icon geklickt');  
     this.router.navigate(['/help']);
   }
 }
