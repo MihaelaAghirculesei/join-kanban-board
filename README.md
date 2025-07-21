@@ -11,7 +11,7 @@
 [![Firebase](https://img.shields.io/badge/Firebase-11.6+-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 
-[🎯 Live Demo](#-quick-start) • [✨ Features](#-features) • [🛠️ Tech Stack](#️-tech-stack) • [🚀 Installation](#-installation) • [📖 Usage](#-usage)
+[🎯 Project Overview](#-project-overview) • [✨ Features](#-features) • [🛠️ Tech Stack](#️-tech-stack) • [🚀 Installation](#-installation) • [📖 Usage](#-usage)
 
 </div>
 
@@ -43,8 +43,8 @@
 - ✅ **Real-Time Sync** - Instant updates across all devices
 - ✅ **Team Collaboration** - Multi-user project sharing
 - ✅ **Task Management** - Detailed task creation and tracking
-- ✅ **Project Organization** - Multiple boards and workspaces
-- ✅ **Due Date Tracking** - Never miss important deadlines
+- ✅ **Contact Management** - Team member profiles and assignment
+- ✅ **Dashboard Analytics** - Project overview and statistics
 - ✅ **Priority Management** - Color-coded task prioritization
 
 </td>
@@ -57,15 +57,11 @@
 - ✅ **PWA Ready** - Progressive Web App capabilities
 - ✅ **Dark/Light Theme** - Customizable user experience
 - ✅ **Search & Filter** - Quick task and project discovery
-- ✅ **Export/Import** - Data portability and backup options
+- ✅ **Legal Compliance** - Privacy policy and legal notices
 
 </td>
 </tr>
 </table>
-
-
-
-
 
 ---
 
@@ -75,31 +71,11 @@
 
 | Frontend | Backend & Database | Development Tools | Deployment |
 |----------|-------------------|-------------------|------------|
-| ![Angular](https://img.shields.io/badge/Angular-17+-DD0031?style=flat&logo=angular&logoColor=white) | ![Firebase](https://img.shields.io/badge/Firebase-11.6+-FFCA28?style=flat&logo=firebase&logoColor=black) | ![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?style=flat&logo=typescript&logoColor=white) | ![Firebase Hosting](https://img.shields.io/badge/Firebase_Hosting-FFCA28?style=flat&logo=firebase&logoColor=black) |
-| ![Angular Material](https://img.shields.io/badge/Angular_Material-UI_Components-607D8B?style=flat) | ![Firestore](https://img.shields.io/badge/Firestore-NoSQL_Database-FFCA28?style=flat&logo=firebase) | ![Angular CLI](https://img.shields.io/badge/Angular_CLI-17.0+-DD0031?style=flat&logo=angular) | ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-2088FF?style=flat&logo=github-actions&logoColor=white) |
-| ![RxJS](https://img.shields.io/badge/RxJS-7.8+-B7178C?style=flat&logo=reactivex&logoColor=white) | ![Firebase Auth](https://img.shields.io/badge/Firebase_Auth-Authentication-FFCA28?style=flat&logo=firebase) | ![Karma](https://img.shields.io/badge/Karma-Testing-green?style=flat) | ![PWA](https://img.shields.io/badge/PWA-Progressive_Web_App-5A0FC8?style=flat) |
-| ![SCSS](https://img.shields.io/badge/SCSS-Styling-CC6699?style=flat&logo=sass&logoColor=white) | ![Firebase Storage](https://img.shields.io/badge/Firebase_Storage-File_Storage-FFCA28?style=flat&logo=firebase) | ![Jasmine](https://img.shields.io/badge/Jasmine-Unit_Testing-8A4182?style=flat&logo=jasmine) | ![Responsive](https://img.shields.io/badge/Responsive-Mobile_First-06B6D4?style=flat) |
+| ![Angular](https://img.shields.io/badge/Angular-17+-DD0031?style=flat&logo=angular&logoColor=white) | ![Firebase](https://img.shields.io/badge/Firebase-17+-FFCA28?style=flat&logo=firebase&logoColor=black) | ![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?style=flat&logo=typescript&logoColor=white) | ![Firebase Hosting](https://img.shields.io/badge/Firebase_Hosting-FFCA28?style=flat&logo=firebase&logoColor=black) |
+| ![Angular Material](https://img.shields.io/badge/Angular_Material-UI_Components-607D8B?style=flat) | ![Firestore](https://img.shields.io/badge/Firestore-NoSQL_Database-FFCA28?style=flat&logo=firebase) | ![Angular CLI](https://img.shields.io/badge/Angular_CLI-17.0+-DD0031?style=flat&logo=angular) | ![Responsive](https://img.shields.io/badge/Responsive-Mobile_First-06B6D4?style=flat) |
+| ![RxJS](https://img.shields.io/badge/RxJS-7.8+-B7178C?style=flat&logo=reactivex&logoColor=white) | ![Firebase Auth](https://img.shields.io/badge/Firebase_Auth-Authentication-FFCA28?style=flat&logo=firebase) | ![Karma + Jasmine](https://img.shields.io/badge/Testing-Karma_+_Jasmine-green?style=flat) | ![Angular CDK](https://img.shields.io/badge/Angular_CDK-Drag_&_Drop-DD0031?style=flat) |
 
 </div>
-
-### 🏗️ **Architecture Highlights**
-
-```typescript
-📁 Project Structure
-├── 🅰️ src/
-│   ├── 📱 app/
-│   │   ├── 🔧 core/           # Singleton services (Auth, API)
-│   │   ├── 📄 features/       # Feature modules (Kanban, Projects)
-│   │   ├── 🎨 shared/         # Reusable components & pipes
-│   │   ├── 🔒 guards/         # Route protection
-│   │   └── 📋 models/         # TypeScript interfaces
-│   ├── 🎨 assets/            # Images, icons, styles
-│   ├── 🌍 environments/      # Environment configurations
-│   └── 🎯 main.ts           # Application bootstrap
-├── 🔥 firebase.json         # Firebase configuration
-├── ⚙️ angular.json          # Angular CLI configuration
-└── 📦 package.json          # Dependencies and scripts
-```
 
 ---
 
@@ -118,26 +94,121 @@ cd join
 npm install
 
 # Start development server
-ng serve
-
+npm start
 # Open http://localhost:4200 in your browser
 ```
 
-### 🔧 **Firebase Setup**
+### 🌍 **Environment Configuration**
+
+```typescript
+// src/environments/environment.ts
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: "your-firebase-api-key",
+    authDomain: "your-project.firebaseapp.com",
+    projectId: "your-project-id",
+    storageBucket: "your-project.firebasestorage.app",
+    messagingSenderId: "your-sender-id",
+    appId: "your-app-id",
+    measurementId: "your-measurement-id"
+  }
+};
+```
+
+> 💡 **Nota**: Sostituisci i placeholder con le tue credenziali Firebase reali ottenute dalla Firebase Console
+
+### 📦 **Development Scripts**
 
 ```bash
-# Install Firebase CLI (if not already installed)
+# Start development server
+npm start
+
+# Build for production
+npm run build
+
+# Build and watch for changes
+npm run watch
+
+# Run unit tests
+npm test
+
+# Angular CLI commands
+ng generate component your-component-name
+ng generate service your-service-name
+```
+
+---
+
+## 📖 **Usage**
+
+### 🚀 **Getting Started**
+
+1. **🌐 Landing Page**: Welcome page with project overview
+2. **📝 Sign Up**: Create your account with email/password
+3. **🔐 Login**: Access your workspace
+4. **📊 Summary Dashboard**: View project overview and statistics
+5. **🎯 Start Managing**: Create tasks, contacts, and organize your workflow
+
+### 🔑 **Core Features**
+
+| Feature | Description | Location |
+|---------|-------------|----------|
+| **📋 Task Management** | Create, edit, and track tasks | Board & Add Task |
+| **👥 Contact Management** | Manage team members and contacts | Contact List |
+| **📊 Kanban Board** | Visual task organization with drag & drop | Board |
+| **📈 Dashboard** | Project summary and analytics | Summary |
+| **🔐 Authentication** | Secure login/signup system | Login/Signup |
+| **📱 Responsive Design** | Works on desktop, tablet, and mobile | All Pages |
+
+### 🎯 **Main Workflow**
+
+#### **Task Management:**
+- **Create Tasks**: Use "Add Task" to create new tasks with priorities and due dates
+- **Organize Tasks**: Drag and drop tasks between columns on the Kanban board
+- **Track Progress**: View task status and completion in the board view
+- **Edit Tasks**: Click on any task to modify details
+
+#### **Contact Management:**
+- **Add Contacts**: Create new team member profiles
+- **Contact List**: View all team members and their details
+- **Assign Tasks**: Link contacts to specific tasks for accountability
+
+#### **Dashboard:**
+- **Summary View**: Get overview of all projects and task statistics
+- **Quick Actions**: Access frequently used features from the main dashboard
+
+### 📱 **Navigation Structure**
+
+```
+├── 🏠 Landing Page (Welcome)
+├── 🔐 Authentication (Login/Signup)
+├── 📊 Main Content
+│   ├── 📈 Summary Dashboard
+│   ├── 📋 Kanban Board
+│   ├── ➕ Add Task
+│   ├── 👥 Contacts
+│   │   ├── 📝 Add Contact
+│   │   ├── 📋 Contact List
+│   │   └── 👤 Single Contact View
+├── ❓ Help & Support
+├── ⚖️ Legal Notice
+└── 🔒 Privacy Policy
+```
+
+---
+
+## 🔥 **Firebase Deployment**
+
+```bash
+# Install Firebase CLI
 npm install -g firebase-tools
 
 # Login to Firebase
 firebase login
 
-# Use the Join project
-firebase use join-1-46a2d
-
 # Deploy to Firebase Hosting
-ng build
+npm run build
 firebase deploy
 ```
-
-### 🌍 **Environment Configuration**
+---
