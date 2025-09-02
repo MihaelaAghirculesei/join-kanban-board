@@ -2,11 +2,11 @@
   @if(isAuthRoute()) {
   <router-outlet></router-outlet>
   } @else {
-    @if(getRouterPath('legal-notice') || getRouterPath('privacy') || this.authService.UserLoggedIn){
+    @if(getRouterPath('legal-notice') || getRouterPath('privacy') || (this.authService.UserLoggedIn && this.authService.UserLoggedIn !== '')){
   <app-sidebar></app-sidebar>
   }
   <section>
-    @if(getRouterPath('legal-notice') || getRouterPath('privacy') || this.authService.UserLoggedIn){
+    @if(getRouterPath('legal-notice') || getRouterPath('privacy') || (this.authService.UserLoggedIn && this.authService.UserLoggedIn !== '')){
     <app-header></app-header>
     }
     <router-outlet></router-outlet>

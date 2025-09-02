@@ -156,7 +156,11 @@ export class LoginComponent implements OnInit {
   public async onLogin() {
     try {
       await this.authService.login(this.emailOrUsername, this.password);
-      this.authService.UserLoggedIn = this.authService.getUsername(this.emailOrUsername);
+      let username = this.authService.getUsername(this.emailOrUsername);
+      if (!username || username === '') {
+        username = this.emailOrUsername;
+      }
+      this.authService.UserLoggedIn = username;
       this.goToAnotherPage('/summary');
       localStorage.setItem('loggedIn', this.authService.UserLoggedIn);
     } catch (err: any) {
