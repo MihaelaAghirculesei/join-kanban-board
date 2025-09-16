@@ -6,9 +6,9 @@
 
 **A modern, collaborative project management and task organization platform built with Angular and Firebase**
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-View_Project-success?style=for-the-badge)](https://join-1-46a2d.web.app)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-View_Project-success?style=for-the-badge)](https://mihaela-melania-aghirculesei.de/join/)
 [![Angular](https://img.shields.io/badge/Angular-17+-DD0031?style=for-the-badge&logo=angular)](https://angular.io/)
-[![Firebase](https://img.shields.io/badge/Firebase-11.6+-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-10+-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 
 [🎯 Project Overview](#-project-overview) • [✨ Features](#-features) • [🛠️ Tech Stack](#️-tech-stack) • [🚀 Installation](#-installation) • [📖 Usage](#-usage)
@@ -71,7 +71,7 @@
 
 | Frontend | Backend & Database | Development Tools | Deployment |
 |----------|-------------------|-------------------|------------|
-| ![Angular](https://img.shields.io/badge/Angular-17+-DD0031?style=flat&logo=angular&logoColor=white) | ![Firebase](https://img.shields.io/badge/Firebase-17+-FFCA28?style=flat&logo=firebase&logoColor=black) | ![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?style=flat&logo=typescript&logoColor=white) | ![Firebase Hosting](https://img.shields.io/badge/Firebase_Hosting-FFCA28?style=flat&logo=firebase&logoColor=black) |
+| ![Angular](https://img.shields.io/badge/Angular-17+-DD0031?style=flat&logo=angular&logoColor=white) | ![Firebase](https://img.shields.io/badge/Firebase-10+-FFCA28?style=flat&logo=firebase&logoColor=black) | ![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?style=flat&logo=typescript&logoColor=white) | ![Firebase Hosting](https://img.shields.io/badge/Firebase_Hosting-FFCA28?style=flat&logo=firebase&logoColor=black) |
 | ![Angular Material](https://img.shields.io/badge/Angular_Material-UI_Components-607D8B?style=flat) | ![Firestore](https://img.shields.io/badge/Firestore-NoSQL_Database-FFCA28?style=flat&logo=firebase) | ![Angular CLI](https://img.shields.io/badge/Angular_CLI-17.0+-DD0031?style=flat&logo=angular) | ![Responsive](https://img.shields.io/badge/Responsive-Mobile_First-06B6D4?style=flat) |
 | ![RxJS](https://img.shields.io/badge/RxJS-7.8+-B7178C?style=flat&logo=reactivex&logoColor=white) | ![Firebase Auth](https://img.shields.io/badge/Firebase_Auth-Authentication-FFCA28?style=flat&logo=firebase) | ![Karma + Jasmine](https://img.shields.io/badge/Testing-Karma_+_Jasmine-green?style=flat) | ![Angular CDK](https://img.shields.io/badge/Angular_CDK-Drag_&_Drop-DD0031?style=flat) |
 
@@ -85,10 +85,10 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/MihaelaAghirculesei/join-kanban-board.git
+git clone https://github.com/Soufianenouira/join.git
 
 # Navigate to project directory
-cd join-kanban-board
+cd join
 
 # Install dependencies
 npm install
@@ -98,25 +98,65 @@ npm start
 # Open http://localhost:4200 in your browser
 ```
 
-### 🌍 **Environment Configuration**
+### 🔐 **Security & Environment Setup**
+
+> ⚠️ **Current State**: Firebase configuration is currently hard-coded in `app.config.ts`. This is acceptable for development but should be improved for production.
+
+#### **Current Configuration Structure**
 
 ```typescript
-// src/environments/environment.ts
+// Current setup in app.config.ts (development only)
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideFirebaseApp(() => initializeApp({
+      // Configuration details removed for security
+      // See Firebase Console for actual credentials
+      apiKey: "your-api-key",
+      authDomain: "your-domain.firebaseapp.com",
+      // ... other config
+    }))
+  ]
+};
+```
+
+#### **Recommended Production Setup**
+
+For production deployment, consider moving to environment variables:
+
+```typescript
+// Future improvement: src/environments/environment.ts
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "your-firebase-api-key",
-    authDomain: "your-project.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project.firebasestorage.app",
-    messagingSenderId: "your-sender-id",
-    appId: "your-app-id",
-    measurementId: "your-measurement-id"
+    apiKey: process.env['FIREBASE_API_KEY'],
+    // ... other config from environment variables
   }
 };
 ```
 
-> 💡 **Nota**: Sostituisci i placeholder con le tue credenziali Firebase reali ottenute dalla Firebase Console
+#### **Firestore Security Rules**
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Tasks can be read and written by authenticated users
+    match /tasks/{taskId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Contacts can be read and written by authenticated users
+    match /contacts/{contactId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Users can only access their own user document
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+```
 
 ### 📦 **Development Scripts**
 
@@ -136,6 +176,133 @@ npm test
 # Angular CLI commands
 ng generate component your-component-name
 ng generate service your-service-name
+```
+
+---
+
+## 🧪 **Demo & Testing**
+
+### 🎮 **Try the Live Demo**
+**Live URL**: [https://mihaela-melania-aghirculesei.de/join/](https://mihaela-melania-aghirculesei.de/join/)
+
+**Getting Started:**
+- Create your own account to experience all features
+- Test the drag & drop Kanban functionality
+- Explore real-time collaboration features
+- Try the responsive design on different devices
+
+> 💡 **Tip**: Open the app in multiple browser tabs to see real-time synchronization in action!
+
+### 🧪 **Testing Features**
+- ✅ **User Registration & Authentication**
+- ✅ **Task Creation & Management**
+- ✅ **Contact Management System**
+- ✅ **Kanban Board Drag & Drop**
+- ✅ **Real-time Data Synchronization**
+- ✅ **Responsive Design (Desktop/Tablet/Mobile)**
+
+---
+
+## ⚡ **Performance Metrics**
+
+### 🚀 **Application Performance**
+- 📦 **Bundle Size**: Optimized for fast loading (< 2MB gzipped)
+- 🔄 **Real-time Updates**: Firebase Firestore provides instant synchronization
+- 📱 **Mobile First**: 100% responsive design across all devices
+- ⚡ **Loading Speed**: Lazy loading modules for optimal performance
+- 🎯 **Lighthouse Ready**: Optimized for Core Web Vitals
+
+### 🛡️ **Reliability & Security**
+- 🔐 **Firebase Authentication**: Enterprise-grade security
+- 🔄 **Real-time Sync**: Automatic data backup and synchronization
+- 📱 **PWA Ready**: Offline capability and app-like experience
+- 🧪 **Testing**: Unit tests with Karma & Jasmine
+
+### 🌐 **Browser Compatibility**
+
+| Browser | Version | Support Level |
+|---------|---------|---------------|
+| Chrome | 90+ | ✅ Full Support |
+| Firefox | 88+ | ✅ Full Support |
+| Safari | 14+ | ✅ Full Support |
+| Edge | 90+ | ✅ Full Support |
+| Mobile Safari | iOS 14+ | ✅ Full Support |
+| Chrome Mobile | Android 90+ | ✅ Full Support |
+
+---
+
+## 📸 **Project Screenshots**
+
+### 🗃️ **Database Structure (Current Implementation)**
+
+Based on the actual code implementation:
+
+```typescript
+// Firestore Collections - REAL STRUCTURE
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  date: string;  // ISO date string format
+  priority: 'Urgent' | 'Medium' | 'Low' | '';  // String priority levels
+  assignedTo?: Contact[];  // Array of Contact objects
+  category: string;  // Free-form category string
+  subtasks: { title: string; isDone: boolean }[];  // Simple subtask structure
+  status: string;  // Generic status string
+  dropDownOpen: boolean;  // UI state flag
+}
+
+interface Contact {
+  id?: string;  // Optional ID (generated on save)
+  name: string;
+  email: string;
+  phone: string;  // Required phone field
+  color?: string;  // Optional color assignment
+  letters: string;  // Generated initials (not 'initials')
+  selected: boolean;  // Selection state for UI
+}
+
+interface User {
+  uid: string;
+  email: string;
+  username?: string;  // Optional username field
+  name?: string;
+  createdAt?: string;
+}
+```
+
+### 🔐 **Authentication Flow (Firebase v10+)**
+
+```typescript
+// Authentication Service - SIMPLIFIED IMPLEMENTATION (matches actual code)
+import { Injectable } from '@angular/core';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  constructor(
+    private auth: Auth,
+    private firestore: Firestore,
+    private router: Router
+  ) {}
+
+  async signIn(email: string, password: string) {
+    return await signInWithEmailAndPassword(this.auth, email, password);
+  }
+
+  async signUp(email: string, password: string) {
+    return await createUserWithEmailAndPassword(this.auth, email, password);
+  }
+
+  async signOut(): Promise<void> {
+    await signOut(this.auth);
+    this.router.navigate(['/login']);
+  }
+}
 ```
 
 ---
@@ -161,22 +328,33 @@ ng generate service your-service-name
 | **🔐 Authentication** | Secure login/signup system | Login/Signup |
 | **📱 Responsive Design** | Works on desktop, tablet, and mobile | All Pages |
 
-### 🎯 **Main Workflow**
+### 🎯 **Key Workflows**
 
-#### **Task Management:**
-- **Create Tasks**: Use "Add Task" to create new tasks with priorities and due dates
-- **Organize Tasks**: Drag and drop tasks between columns on the Kanban board
-- **Track Progress**: View task status and completion in the board view
-- **Edit Tasks**: Click on any task to modify details
+#### **Creating a New Task**
+1. Click "Add Task" in the main navigation
+2. Fill required fields:
+   - Task title and description
+   - Select assignee from contacts
+   - Choose priority level (Urgent/Medium/Low)
+   - Set due date
+3. Assign to board column (To Do/In Progress/Await Feedback/Done)
+4. Click "Create Task" - instantly appears on Kanban board
+5. All team members see the update in real-time
 
-#### **Contact Management:**
-- **Add Contacts**: Create new team member profiles
-- **Contact List**: View all team members and their details
-- **Assign Tasks**: Link contacts to specific tasks for accountability
+#### **Managing the Kanban Board**
+1. View four main columns: To Do → In Progress → Await Feedback → Done
+2. Drag & drop tasks between columns to update status
+3. Click on any task card to open detailed view
+4. Edit task properties directly from the board
+5. Use search function to quickly find specific tasks
+6. Filter by assignee, priority, or due date
 
-#### **Dashboard:**
-- **Summary View**: Get overview of all projects and task statistics
-- **Quick Actions**: Access frequently used features from the main dashboard
+#### **Contact Management**
+1. Navigate to "Contacts" section
+2. Add team members with name, email, and phone
+3. System automatically generates initials and assigns colors
+4. Use contacts when creating/assigning tasks
+5. View contact activity and task assignments
 
 ### 📱 **Navigation Structure**
 
@@ -196,212 +374,6 @@ ng generate service your-service-name
 └── 🔒 Privacy Policy
 ```
 
----
-
-## 🔥 **Firebase Setup**
-
-```bash
-# Install Firebase CLI
-npm install -g firebase-tools
-
-# Login to Firebase
-firebase login
-
-# Deploy to Firebase Hosting
-npm run build
-firebase deploy
-```
----
-
-## 🔥 **Firebase Integration**
-
-### 🗃️ **Database Structure**
-
-```typescript
-// Firestore Collections
-interface Task {
- id: string;
- title: string;
- description: string;
- dueDate: Timestamp;
- priority: 'urgent' | 'medium' | 'low';
- assignedTo: string[];
- category: 'User Story' | 'Technical Task' | 'Design'; 
- status: 'todo' | 'in-progress' | 'await-feedback' | 'done';  
- subtasks: SubTask[]; 
- createdAt: Timestamp;
- updatedAt: Timestamp;
- createdBy: string;
-}
-
-interface SubTask {
- id: string;
- title: string;
- completed: boolean;
- createdAt: Timestamp;
-}
-
-interface Contact {
- id: string;
- name: string;
- email: string;
- phone?: string;
- initials: string;
- color: string;  
- createdAt: Timestamp;
- createdBy: string;
-}
-
-interface User {
- uid: string;
- email: string;
- displayName: string;
- photoURL?: string;
- createdAt: Timestamp;
-}
-
-interface BoardColumn {
- id: string;
- title: 'To do' | 'In progress' | 'Await feedback' | 'Done';
- order: number;
- tasks: string[];
-}
-```
-
-### 🔐 **Authentication Flow**
-
-```typescript
-// Authentication Service
-@Injectable({
- providedIn: 'root'
-})
-export class AuthService {
- constructor(
-   private afAuth: AngularFireAuth,
-   private firestore: AngularFirestore,
-   private router: Router
- ) {}
-
- async signIn(email: string, password: string): Promise<UserCredential> {
-   try {
-     return await this.afAuth.signInWithEmailAndPassword(email, password);
-   } catch (error: any) {
-     throw new Error(this.getErrorMessage(error.code));
-   }
- }
-
- async signUp(email: string, password: string, displayName?: string): Promise<UserCredential> {
-   try {
-     const credential = await this.afAuth.createUserWithEmailAndPassword(email, password);
-     
-     if (displayName && credential.user) {
-       await credential.user.updateProfile({ displayName });
-       await this.createUserDocument(credential.user);
-     }
-     
-     return credential;
-   } catch (error: any) {
-     throw new Error(this.getErrorMessage(error.code));
-   }
- }
-
- getCurrentUser(): Observable<User | null> {
-   return this.afAuth.authState;
- }
-
- async signOut(): Promise<void> {
-   await this.afAuth.signOut();
-   this.router.navigate(['/login']);
- }
-
- isAuthenticated(): Observable<boolean> {
-   return this.afAuth.authState.pipe(map(user => !!user));
- }
-
- async resetPassword(email: string): Promise<void> {
-   return await this.afAuth.sendPasswordResetEmail(email);
- }
-
- private async createUserDocument(user: User): Promise<void> {
-   const userData = {
-     uid: user.uid,
-     email: user.email,
-     displayName: user.displayName,
-     joinedProjects: [],
-     createdAt: new Date()
-   };
-   await this.firestore.doc(`users/${user.uid}`).set(userData, { merge: true });
- }
-
- private getErrorMessage(code: string): string {
-   const errors: { [key: string]: string } = {
-     'auth/user-not-found': 'User not found',
-     'auth/wrong-password': 'Incorrect password',
-     'auth/email-already-in-use': 'Email already registered',
-     'auth/weak-password': 'Password too weak',
-     'auth/invalid-email': 'Invalid email'
-   };
-   return errors[code] || 'Authentication error';
- }
-}
-
----
-
-## 📖 **Usage**
-
-### 🏠 **Getting Started**
-
-1. **🔐 Landing Page** - Sign up with email or login to access your workspace
-2. **📊 Summary Dashboard** - Overview of tasks, deadlines, and team activity
-3. **➕ Add Task** - Create tasks with title, description, priority, and assignees
-4. **📋 Board (Kanban)** - Visualize workflow with "To Do", "In Progress", "Await Feedback", "Done"
-5. **👥 Contacts** - Add and manage team members for task assignments
-6. **📝 Task Details** - Click any task to edit, update status, or add comments
-
-### 🎯 **Key Workflows**
-
-#### 🆕 Creating a New Task
-```typescript
-// Step-by-step task creation
-1. Click "Add Task" in the main navigation
-2. Fill required fields:
-  - Task title and description
-  - Select assignee from contacts
-  - Choose priority level (High/Medium/Low)
-  - Set due date
-3. Assign to board column (To Do/In Progress/Await Feedback/Done)
-4. Click "Create Task" - instantly appears on Kanban board
-5. All team members see the update in real-time
-
-### 🎯 **Key Workflows**
-
-#### Creating a New Task
-```typescript
-// Task creation flow
-1. Navigate to "Add Task" section
-2. Fill in task details (title, description, assignee)
-3. Set priority and due date
-4. Select project and status column
-5. Save task - automatically syncs to Kanban board
-```
-
-#### Managing the Kanban Board
-// Interactive board operations
-1. View four main columns: To Do → In Progress → Await Feedback → Done
-2. Drag & drop tasks between columns to update status
-3. Click on any task card to open detailed view
-4. Edit task properties directly from the board
-5. Use search function to quickly find specific tasks
-6. Filter by assignee, priority, or due date
-```
-
-👥 Contact Management
-// Team collaboration setup
-1. Navigate to "Contacts" section
-2. Add team members with name and email
-3. Assign roles and responsibilities
-4. Use contacts when creating/assigning tasks
-5. View contact activity and task assignments
 ---
 
 ## 🎨 **UI/UX Features**
@@ -426,9 +398,12 @@ export class AuthService {
   --text-primary: #ffffff;
   --text-secondary: #aaaaaa;
 }
+```
 
-🎯 Component Structure
-typescript// Shared Components
+### 🎯 **Component Structure**
+
+```typescript
+// Shared Components
 ├── HeaderComponent      # Navigation and user menu
 ├── SidebarComponent    # Main navigation menu
 ├── FooterComponent     # App footer information
@@ -439,19 +414,85 @@ typescript// Shared Components
 ├── BoardComponent      # Kanban board display
 ├── ContactsComponent   # Contact management
 └── TaskComponent       # Task detail view
+```
 
+### 🎯 **Angular Material Integration**
 
-🎯 Angular Material Integration
-typescript// Material Modules
+```typescript
+// Material Modules
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+```
 
 ---
 
+## 🛠️ **Troubleshooting & FAQ**
 
+### 🚨 **Common Issues & Solutions**
+
+#### **Installation Issues**
+```bash
+# Issue: npm install fails
+# Solution: Clear cache and reinstall
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install
+
+# Issue: Angular CLI version conflicts
+# Solution: Update to latest version
+npm uninstall -g @angular/cli
+npm install -g @angular/cli@latest
+```
+
+#### **Firebase Connection Issues**
+```typescript
+// Issue: Firebase configuration errors
+// Solution: Verify environment configuration
+// Check that all Firebase credentials are correctly set in app.config.ts
+
+// Issue: Firestore security rules blocking access
+// Solution: Update security rules (see Security section above)
+```
+
+#### **Build & Deployment Issues**
+```bash
+# Issue: Build fails in production
+# Solution: Build with production flag
+ng build --configuration production
+
+# Issue: Firebase deployment fails
+# Solution: Login and initialize Firebase
+firebase login
+firebase init
+firebase deploy
+```
+
+### ❓ **Frequently Asked Questions**
+
+#### **Q: How do I add new team members?**
+A: Navigate to Contacts section → Add Contact → Fill in name, email, and phone → Save. The contact will be available for task assignment.
+
+#### **Q: Can I use this offline?**
+A: The app has basic PWA capabilities, but requires internet connection for real-time synchronization and Firebase services.
+
+#### **Q: How do I change task status?**
+A: Simply drag and drop tasks between columns on the Kanban board, or click on a task to edit its details.
+
+#### **Q: Is my data secure?**
+A: Yes, all data is stored in Firebase with authentication required. See the Security section for implementation details.
+
+#### **Q: Can I export my data?**
+A: Data export functionality is planned for future releases. Currently, data is accessible through the Firebase console.
+
+### 📞 **Support**
+- **Issues**: [GitHub Issues](https://github.com/Soufianenouira/join/issues)
+- **Email**: [kontakt@mihaela-melania-aghirculesei.de](mailto:kontakt@mihaela-melania-aghirculesei.de)
+- **Documentation**: This README and inline code comments
+
+---
 
 ## 🚀 **Deployment**
 
@@ -468,14 +509,21 @@ firebase deploy
 firebase deploy -m "Version 1.2.0 release"
 ```
 
-### 🌐 **Custom Domain Setup**
+### 🌐 **Firebase Setup**
 
 ```bash
-# Add custom domain in Firebase Console
-firebase hosting:channel:deploy preview-channel
+# Install Firebase CLI
+npm install -g firebase-tools
 
-# Configure SSL (automatic with Firebase)
-# Update DNS records as instructed
+# Login to Firebase
+firebase login
+
+# Initialize Firebase in your project
+firebase init
+
+# Deploy to Firebase Hosting
+npm run build
+firebase deploy
 ```
 
 ---
@@ -519,7 +567,7 @@ We welcome contributions! Here's how you can help improve Join:
 
 ```bash
 # Fork and clone the repository
-git clone https://github.com/MihaelaAghirculesei/join-kanban-board
+git clone https://github.com/Soufianenouira/join.git
 
 # Create feature branch
 git checkout -b feature/amazing-feature
@@ -570,10 +618,10 @@ git push origin feature/amazing-feature
 
 <div align="center">
 
-<!-- [![Portfolio](https://img.shields.io/badge/Portfolio-Coming_Soon-orange?style=for-the-badge&logo=firefox)](https://mihaela-melania-aghirculesei.de) -->
+[![Portfolio](https://img.shields.io/badge/Portfolio-View_Portfolio-orange?style=for-the-badge&logo=firefox)](https://mihaela-melania-aghirculesei.de)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/mihaela-aghirculesei-84147a23b/)
 [![Email](https://img.shields.io/badge/Email-Get_In_Touch-D14836?style=for-the-badge&logo=gmail)](mailto:kontakt@mihaela-melania-aghirculesei.de)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/MihaelaAghirculesei)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/Soufianenouira/join)
 
 **Built with 💖 and ☕ by Mihaela Melania Aghirculesei**
 
@@ -603,11 +651,10 @@ git push origin feature/amazing-feature
 
 ### 📈 **Project Stats**
 
-![GitHub stars](https://img.shields.io/github/stars/MihaelaAghirculesei/advanced-kanban-board?style=social)
-![GitHub forks](https://img.shields.io/github/forks/MihaelaAghirculesei/advanced-kanban-board?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/MihaelaAghirculesei/join-kanban-board?style=social)
+![GitHub stars](https://img.shields.io/github/stars/Soufianenouira/join?style=social)
+![GitHub forks](https://img.shields.io/github/forks/Soufianenouira/join?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/Soufianenouira/join?style=social)
 
 **Made with Angular 17 + Firebase 🔥**
-
 
 </div>
