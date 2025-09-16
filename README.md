@@ -233,6 +233,40 @@ ng generate service your-service-name
 
 ## 📸 **Project Screenshots**
 
+### 🖥️ **Desktop Experience**
+
+<div align="center">
+
+| Dashboard | Kanban Board | Task Management |
+|-----------|--------------|-----------------|
+| ![Dashboard](./src/assets/img/README/dashboard-desktop.png) | ![Kanban](./src/assets/img/README/kanban-board.png) | ![Tasks](./src/assets/img/README/task-management.png) |
+
+</div>
+
+### 📱 **Mobile Experience**
+
+<div align="center">
+
+| Mobile Dashboard | Mobile Kanban | Contact Management |
+|------------------|---------------|-------------------|
+| ![Mobile Dashboard](./src/assets/img/README/mobile-dashboard.png) | ![Mobile Kanban](./src/assets/img/README/mobile-kanban.png) | ![Mobile Contacts](./src/assets/img/README/contact-management.png) |
+
+</div>
+
+### 📋 **Additional Views**
+
+<div align="center">
+
+| Mobile Task Management |
+|------------------------|
+| ![Mobile Task Management](./src/assets/img/README/mobile-task-management.png) |
+
+</div>
+
+---
+
+## 🔥 **Firebase Integration**
+
 ### 🗃️ **Database Structure (Current Implementation)**
 
 Based on the actual code implementation:
