@@ -15,13 +15,12 @@ export const appConfig: ApplicationConfig = {
     ),
     provideFirebaseApp(() =>
       initializeApp({
-        projectId: 'join-1-46a2d',
-        appId: '1:414847680321:web:1f023837141c2935ac6bc0',
-        storageBucket: 'join-1-46a2d.firebasestorage.app',
-        apiKey: 'AIzaSyCXcBokA4SNkxf0PRKFrD0_E0GnPnrnUAs',
-        authDomain: 'join-1-46a2d.firebaseapp.com',
-        messagingSenderId: '414847680321',
-        measurementId: 'G-RXQNVD7VXR',
+        apiKey: 'AIzaSyBC58nP_y_kR0rl7_n-wOCKLhaAjsTHQlM',
+        authDomain: 'join-kanban-mihaela.firebaseapp.com',
+        projectId: 'join-kanban-mihaela',
+        storageBucket: 'join-kanban-mihaela.firebasestorage.app',
+        messagingSenderId: '4712777391',
+        appId: '1:4712777391:web:903d0e427ce2032587f65a',
       })
     ),
     provideFirestore(() => getFirestore()),

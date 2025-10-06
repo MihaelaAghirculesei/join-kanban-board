@@ -330,6 +330,7 @@
         @include fontStyle(18px, 700, $primary-color, none);
         position: relative;
         min-height: 32px;
+        gap: 8px;
         .add-button {
           background: none;
           border: 2px solid $primary-color;
@@ -339,6 +340,7 @@
           height: 30px;
           border-radius: 10px;
           transition: background-color 0.2s ease, border-color 0.2s ease;
+          margin-right: 15px;
           &:hover {
             border-color: $hover-color;
             img {

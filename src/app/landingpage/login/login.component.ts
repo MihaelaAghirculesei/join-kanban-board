@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
    * Automatically navigates to summary page upon successful login.
    */
   async guestLogin() {
-    await this.authService.login('guest@guest.de', '123456');
+    await this.authService.login('guest-join@guest.de', 'guest123456');
     this.authService.UserLoggedIn = 'Guest';
     this.router.navigate(['/summary']);
     localStorage.setItem('loggedIn', 'Guest');
