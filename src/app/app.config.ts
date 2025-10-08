@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
         storageBucket: 'join-kanban-mihaela.firebasestorage.app',
         messagingSenderId: '4712777391',
         appId: '1:4712777391:web:903d0e427ce2032587f65a',
-      })
+      }, { automaticDataCollectionEnabled: false })
     ),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
