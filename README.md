@@ -523,7 +523,7 @@ A: Data export functionality is planned for future releases. Currently, data is 
 
 ### 📞 **Support**
 - **Issues**: [GitHub Issues](https://github.com/Soufianenouira/join/issues)
-- **Email**: [kontakt@mihaela-melania-aghirculesei.de](mailto:kontakt@mihaela-melania-aghirculesei.de)
+- **Email**: [aghirculesei@gmail.com](mailto:aghirculesei@gmail.com)
 - **Documentation**: This README and inline code comments
 
 ---
@@ -654,7 +654,7 @@ git push origin feature/amazing-feature
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-View_Portfolio-orange?style=for-the-badge&logo=firefox)](https://mihaela-melania-aghirculesei.de)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/mihaela-aghirculesei-84147a23b/)
-[![Email](https://img.shields.io/badge/Email-Get_In_Touch-D14836?style=for-the-badge&logo=gmail)](mailto:kontakt@mihaela-melania-aghirculesei.de)
+[![Email](https://img.shields.io/badge/Email-Get_In_Touch-D14836?style=for-the-badge&logo=gmail)](mailto:aghirculesei@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/Soufianenouira/join)
 
 **Built with 💖 and ☕ by Mihaela Melania Aghirculesei**
