@@ -6,7 +6,7 @@
 
 **A modern, collaborative project management and task organization platform built with Angular and Firebase**
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-View_Project-success?style=for-the-badge)](https://mihaela-melania-aghirculesei.de/join/)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-View_Project-success?style=for-the-badge)](https://aghirculesei.pages.dev/join/)
 [![Angular](https://img.shields.io/badge/Angular-17+-DD0031?style=for-the-badge&logo=angular)](https://angular.io/)
 [![Firebase](https://img.shields.io/badge/Firebase-10+-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
@@ -183,7 +183,7 @@ ng generate service your-service-name
 ## 🧪 **Demo & Testing**
 
 ### 🎮 **Try the Live Demo**
-**Live URL**: [https://mihaela-melania-aghirculesei.de/join/](https://mihaela-melania-aghirculesei.de/join/)
+**Live URL**: [https://aghirculesei.pages.dev/join/](https://aghirculesei.pages.dev/join/)
 
 **Getting Started:**
 - Create your own account to experience all features
@@ -652,7 +652,7 @@ git push origin feature/amazing-feature
 
 <div align="center">
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-View_Portfolio-orange?style=for-the-badge&logo=firefox)](https://mihaela-melania-aghirculesei.de)
+[![Portfolio](https://img.shields.io/badge/Portfolio-View_Portfolio-orange?style=for-the-badge&logo=firefox)](https://aghirculesei.pages.dev/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/mihaela-aghirculesei-84147a23b/)
 [![Email](https://img.shields.io/badge/Email-Get_In_Touch-D14836?style=for-the-badge&logo=gmail)](mailto:aghirculesei@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/Soufianenouira/join)
