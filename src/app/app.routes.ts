@@ -9,6 +9,7 @@ import { BoardComponent } from './main-content/board/board.component';
 import { TaskComponent } from './main-content/task/task.component';
 import { LoginComponent } from './landingpage/login/login.component';
 import { SignupComponent } from './landingpage/signup/signup.component';
+import { authGuard } from './guards/auth.guard';
 
 /**
  * @fileoverview
@@ -33,35 +34,35 @@ export const routes: Routes = [
    * Route for the summary component.
    */
   {
-    path: 'summary', component: SummaryComponent,
+    path: 'summary', component: SummaryComponent, canActivate: [authGuard],
   },
 
   /**
    * Route for the add-task component.
    */
   {
-    path: 'add-task', component: AddTaskComponent,
+    path: 'add-task', component: AddTaskComponent, canActivate: [authGuard],
   },
 
   /**
    * Route for the board component.
    */
   {
-    path: 'board', component: BoardComponent,
+    path: 'board', component: BoardComponent, canActivate: [authGuard],
   },
 
   /**
    * Route for the contact component.
    */
   {
-    path: 'contact', component: ContactComponent,
+    path: 'contact', component: ContactComponent, canActivate: [authGuard],
   },
 
   /**
    * Route for the help component.
    */
   { 
-    path: 'help', component: HelpComponent
+    path: 'help', component: HelpComponent, canActivate: [authGuard],
   },
 
   /**
@@ -83,5 +84,12 @@ export const routes: Routes = [
    */
   {
     path: 'login', component: LoginComponent,
+  },
+
+  /**
+   * Unknown URLs fall back to the login page.
+   */
+  {
+    path: '**', redirectTo: '',
   }
 ];
