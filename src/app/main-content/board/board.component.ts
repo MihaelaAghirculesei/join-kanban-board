@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild, OnInit, HostListener, signal, effect } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild, HostListener, signal } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -44,19 +44,11 @@ export class BoardComponent  {
   @ViewChild('overlayRef') overlayRefDropDown!: ElementRef;
 
   /**
-   * Lifecycle hook that is called after data-bound properties are initialized
+   * Initializes the responsive layout flags.
    */
-
   constructor() {
     this.checkWindowSize();
-    effect(() => {
-      
-    });
-    window.addEventListener('resize', () => {
-      this.desktopView.set(window.innerWidth < 1440);
-    });
   }
-  
 
   /**
    * Updates the status of a task
@@ -67,13 +59,6 @@ export class BoardComponent  {
     task.status = status;
     task.dropDownOpen = false;
     this.taskService.updateTask(task.id, task);
-  }
-
-  @HostListener('window:resize', [])
-  onResize() {
-    console.log(this.desktopView);
-    
-   
   }
 
   /**
@@ -189,17 +174,13 @@ export class BoardComponent  {
   }
 
   /**
-   * Host listener to check window size and set mobile flag
+   * Updates the responsive layout flags whenever the window is resized.
    */
   @HostListener('window:resize')
   checkWindowSize() {
     this.isMobile = window.innerWidth <= 1280;
+    this.desktopView.set(window.innerWidth < 1440);
   }
-
-  /**
-   * Constructor initializes and checks window size
-   */
- 
 
   /**
    * Navigates to the specified route.
