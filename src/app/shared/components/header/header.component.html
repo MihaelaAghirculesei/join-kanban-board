@@ -1,30 +1,32 @@
 <header class="header">
   <div class="content">
     <div class="header-content">
-      @if(this.authService.UserLoggedIn !=''){
-      <a routerLink="/summary">
+      <a [routerLink]="authService.UserLoggedIn ? '/summary' : '/login'">
         <img class="mobile-logo" src="assets/img/header/join-logo-mobile.svg" alt="JOIN Logo" />
       </a>
-      } @else {
-      <a href="">
-        <img class="mobile-logo" src="assets/img/header/join-logo-mobile.svg" alt="JOIN Logo" />
-      </a>
-      }
       <h1 class="header-title">Kanban Project Management Tool</h1>
     </div>
-  @if(this.authService.UserLoggedIn != ''){
+  @if(authService.UserLoggedIn){
     <div class="profile-section">
       <a routerLink="/help">
-        <img class="help-icon" src="assets/img/header/help.svg" alt="Help Icon" />
+        <img class="help-icon" src="assets/img/header/help.svg" alt="Help" />
       </a>
 
-      <div class="profile" (click)="toggleMenu($event)">{{ contactService.getFirstAndLastNameFirstLetter(this.authService.UserLoggedIn!) }}</div>
+      <button
+        type="button"
+        class="profile"
+        aria-label="Open user menu"
+        aria-haspopup="menu"
+        [attr.aria-expanded]="showMenu"
+        (click)="toggleMenu($event)">
+        {{ contactService.getFirstAndLastNameFirstLetter(authService.UserLoggedIn) }}
+      </button>
 
       <div class="dropdown-menu" [class.active]="showMenu" #menuRef>
         <a routerLink="/help" class="menu-item" (click)="closeMenu()"> Help </a>
         <a routerLink="/legal-notice" class="menu-item" (click)="closeMenu()"> Legal Notice </a>
         <a routerLink="/privacy" class="menu-item" (click)="closeMenu()"> Privacy Policy </a>
-        <a class="menu-item" (click)="closeMenu(); this.authService.logout()"> Log out </a>
+        <button type="button" class="menu-item" (click)="closeMenu(); authService.logout()"> Log out </button>
       </div>
     </div>
   }
