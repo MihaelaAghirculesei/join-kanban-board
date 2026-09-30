@@ -69,9 +69,4 @@ export class HeaderComponent {
   closeMenu() {
     this.showMenu = false;
   }
-
-  /**
-   * Initializes the HeaderComponent.
-   */
-  constructor() {}
 }
