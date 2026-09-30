@@ -16,7 +16,7 @@ export class HelpComponent {
   /**
    * The support email address for user assistance.
    */
-  supportEmail = 'support@join.com';
+  supportEmail = 'aghirculesei@gmail.com';
 
   /**
    * Initializes the HelpComponent and injects the Router service.
