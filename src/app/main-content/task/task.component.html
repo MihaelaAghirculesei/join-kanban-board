@@ -38,7 +38,7 @@
         </div>
         <h3>Assigned To:</h3>
         <div class="assigned-to">
-                @for (item of task?.assignedTo; track item; let index = $index) {
+                @for (item of task.assignedTo; track item; let index = $index) {
                     <div class="contact">
                       <div class="contact-img" [ngStyle]="{ background: item['color'] }">
                         <p>{{ contactService.getFirstAndLastNameFirstLetter(item['name']) }}</p>
@@ -50,7 +50,7 @@
                     </div>
                     }
         </div>
-        @if(task?.subtasks?.length){
+        @if(task.subtasks.length){
         <h3>Subtasks</h3>
         <div class="subtasks">
             @for (subtask of task!.subtasks; track $index) {
