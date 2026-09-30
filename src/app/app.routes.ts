@@ -1,12 +1,4 @@
 import { Routes } from '@angular/router';
-import { LegalNoticeComponent } from './shared/components/header/legal-notice/legal-notice.component';
-import { PrivacyPolicyComponent } from './shared/components/header/privacy-policy/privacy-policy.component';
-import { ContactComponent } from './main-content/contact/contact.component';
-import { HelpComponent } from './shared/components/header/help/help.component';
-import { SummaryComponent } from './main-content/summary/summary.component';
-import { AddTaskComponent } from './main-content/add-task/add-task.component';
-import { BoardComponent } from './main-content/board/board.component';
-import { TaskComponent } from './main-content/task/task.component';
 import { LoginComponent } from './landingpage/login/login.component';
 import { SignupComponent } from './landingpage/signup/signup.component';
 import { authGuard } from './guards/auth.guard';
@@ -14,6 +6,7 @@ import { authGuard } from './guards/auth.guard';
 /**
  * @fileoverview
  * Application routes configuration for Angular Router.
+ * Landing pages are loaded eagerly, all other pages are lazy-loaded.
  */
 export const routes: Routes = [
   /**
@@ -34,49 +27,72 @@ export const routes: Routes = [
    * Route for the summary component.
    */
   {
-    path: 'summary', component: SummaryComponent, canActivate: [authGuard],
+    path: 'summary',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./main-content/summary/summary.component').then((m) => m.SummaryComponent),
   },
 
   /**
    * Route for the add-task component.
    */
   {
-    path: 'add-task', component: AddTaskComponent, canActivate: [authGuard],
+    path: 'add-task',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./main-content/add-task/add-task.component').then((m) => m.AddTaskComponent),
   },
 
   /**
    * Route for the board component.
    */
   {
-    path: 'board', component: BoardComponent, canActivate: [authGuard],
+    path: 'board',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./main-content/board/board.component').then((m) => m.BoardComponent),
   },
 
   /**
    * Route for the contact component.
    */
   {
-    path: 'contact', component: ContactComponent, canActivate: [authGuard],
+    path: 'contact',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./main-content/contact/contact.component').then((m) => m.ContactComponent),
   },
 
   /**
    * Route for the help component.
    */
-  { 
-    path: 'help', component: HelpComponent, canActivate: [authGuard],
+  {
+    path: 'help',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./shared/components/header/help/help.component').then((m) => m.HelpComponent),
   },
 
   /**
    * Route for the privacy policy component.
    */
   {
-    path: 'privacy', component: PrivacyPolicyComponent,
+    path: 'privacy',
+    loadComponent: () =>
+      import('./shared/components/header/privacy-policy/privacy-policy.component').then(
+        (m) => m.PrivacyPolicyComponent
+      ),
   },
 
   /**
    * Route for the legal notice component.
    */
   {
-    path: 'legal-notice', component: LegalNoticeComponent,
+    path: 'legal-notice',
+    loadComponent: () =>
+      import('./shared/components/header/legal-notice/legal-notice.component').then(
+        (m) => m.LegalNoticeComponent
+      ),
   },
 
   /**
