@@ -1,12 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { FeedbackServiceService } from './services/feedback.service';
 import { OverlayService } from './services/overlay.service';
 import { OverlayComponent } from './main-content/contact/overlay/overlay.component';
-import { TaskComponent } from './main-content/task/task.component';
 import { AuthService } from './services/auth.service';
 import { ScrollService } from './interfaces/scroll';
 
@@ -17,19 +15,11 @@ import { ScrollService } from './interfaces/scroll';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, SidebarComponent, OverlayComponent],
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent, OverlayComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-
- 
-
-  /**
-   * The title of the application.
-   */
-  title = 'project';
-
   /**
    * Injected Angular Router instance.
    */
@@ -56,13 +46,6 @@ export class AppComponent {
     return this.router.url.includes(path);
   }
 
-  /**
-   * Loads the user's login state from local storage and updates the AuthService.
-   */
-  getLocalStorage() {
-    this.authService.UserLoggedIn = localStorage.getItem('loggedIn');
-  }
-  
 /**
  * Checks if the current route is an authentication route.
  *
