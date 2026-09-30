@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 /**
@@ -19,13 +19,12 @@ export class HelpComponent {
   supportEmail = 'aghirculesei@gmail.com';
 
   /**
-   * Initializes the HelpComponent and injects the Router service.
-   * @param router The Angular Router used for navigation.
+   * Angular Router used for navigation.
    */
-  constructor(private router: Router) {}
+  private router = inject(Router);
 
   /**
-   * Navigates the user back to the home page when called.
+   * Navigates the user back to the summary page.
    */
   onBackClick(): void {
     this.router.navigate(['/summary']);
