@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { testProviders } from '../../../../testing/test-providers';
 
 import { OverlayComponent } from './overlay.component';
 
@@ -8,7 +9,8 @@ describe('ContactOverlayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OverlayComponent]
+      imports: [OverlayComponent],
+      providers: testProviders,
     })
     .compileComponents();
     

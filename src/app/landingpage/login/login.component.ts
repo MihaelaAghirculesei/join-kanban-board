@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { FeedbackServiceService } from '../../services/feedback.service';
 import { ContactService } from '../../services/contact.service';
@@ -54,12 +54,10 @@ export class LoginComponent implements OnInit {
   /**
    * Creates an instance of LoginComponent.
    *
-   * @param routerModule - RouterModule (optional, likely unused here)
    * @param router - Angular Router service for navigation
    * @param authService - Service to perform authentication requests
    */
   constructor(
-    private routerModule: RouterModule,  // optional – kann entfernt werden, falls nicht verwendet
     private router: Router,
     private authService: AuthService
   ) {}

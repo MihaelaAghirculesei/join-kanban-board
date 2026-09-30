@@ -16,7 +16,7 @@ import { OverlayService } from '../../../services/overlay.service';
   templateUrl: './add-contact.component.html',
   styleUrl: './add-contact.component.scss',
 })
-export class addContactComponent {
+export class AddContactComponent {
  
   /**
    * Component constructor

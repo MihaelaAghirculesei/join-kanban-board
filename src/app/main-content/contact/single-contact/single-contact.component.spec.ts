@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { testProviders } from '../../../../testing/test-providers';
 
 import { SingleContactComponent } from './single-contact.component';
 
@@ -8,7 +9,8 @@ describe('SingleContactComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SingleContactComponent]
+      imports: [SingleContactComponent],
+      providers: testProviders,
     })
     .compileComponents();
     

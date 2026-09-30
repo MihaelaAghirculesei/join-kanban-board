@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { testProviders } from '../../../../../testing/test-providers';
 
 import { HelpComponent } from './help.component';
 
@@ -8,7 +9,8 @@ describe('HelpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HelpComponent]
+      imports: [HelpComponent],
+      providers: testProviders,
     })
     .compileComponents();
     
