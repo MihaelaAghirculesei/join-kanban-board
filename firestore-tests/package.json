@@ -1,0 +1,13 @@
+{
+  "name": "join-firestore-rules-tests",
+  "private": true,
+  "type": "module",
+  "description": "Checks firestore.rules against the local Firestore emulator",
+  "scripts": {
+    "test": "npx --yes firebase-tools@15 emulators:exec --only firestore --project demo-join-rules --config firebase.json \"node rules.test.mjs\""
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.2",
+    "firebase": "^12.19.0"
+  }
+}
