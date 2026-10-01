@@ -15,7 +15,9 @@ import {
   collection,
   query,
   where,
+  limit,
   doc,
+  getDoc,
   getDocs,
   setDoc,
 } from '@angular/fire/firestore';
@@ -61,7 +63,7 @@ export class AuthService {
     let email = emailOrUsername;
     const isEmail = emailOrUsername.includes('@');
     if (!isEmail) {
-      const q = query(collection(this.firestore, 'users'), where('username', '==', emailOrUsername));
+      const q = query(collection(this.firestore, 'users'), where('username', '==', emailOrUsername), limit(1));
       const result = await getDocs(q);
       if (result.empty) {
         throw new Error('Username not found');
@@ -70,6 +72,16 @@ export class AuthService {
       email = userData['email'];
     }
     return signInWithEmailAndPassword(this.auth, email, password);
+  }
+
+  /**
+   * Reads the display name stored in the signed-in user's profile document
+   * @param uid - Firebase user id
+   * @returns The stored username, or an empty string if there is none
+   */
+  async getProfileName(uid: string): Promise<string> {
+    const profile = await getDoc(doc(this.firestore, 'users', uid));
+    return profile.exists() ? profile.data()['username'] ?? '' : '';
   }
 
   /**

@@ -152,8 +152,8 @@ export class LoginComponent implements OnInit {
    */
   public async onLogin() {
     try {
-      await this.authService.login(this.emailOrUsername, this.password);
-      let username = this.authService.getUsername(this.emailOrUsername);
+      const credential = await this.authService.login(this.emailOrUsername, this.password);
+      let username = await this.authService.getProfileName(credential.user.uid);
       if (!username || username === '') {
         username = this.emailOrUsername;
       }
