@@ -15,7 +15,6 @@ import { Router, RouterLink } from '@angular/router';
  */
 @Component({
   selector: 'app-board',
-  standalone: true,
   imports: [CommonModule, FormsModule, CdkDrag, CdkDropList, CdkDragPreview, RouterLink],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',

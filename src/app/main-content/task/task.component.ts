@@ -12,7 +12,6 @@ import { NgModel, FormsModule } from '@angular/forms';
  */
 @Component({
   selector: 'app-task',
-  standalone: true,
   imports: [NgStyle, NgClass, FormsModule, DatePipe],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'

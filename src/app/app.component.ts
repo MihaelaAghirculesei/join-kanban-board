@@ -14,7 +14,6 @@ import { ScrollService } from './interfaces/scroll';
  */
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet, HeaderComponent, SidebarComponent, OverlayComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

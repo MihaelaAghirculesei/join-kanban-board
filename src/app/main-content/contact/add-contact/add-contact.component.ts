@@ -11,7 +11,6 @@ import { OverlayService } from '../../../services/overlay.service';
  */
 @Component({
   selector: 'app-add-contact',
-  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './add-contact.component.html',
   styleUrl: './add-contact.component.scss',

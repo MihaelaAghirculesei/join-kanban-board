@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
  */
 @Component({
   selector: 'app-signup',
-  standalone: true,
   imports: [FormsModule, NgClass],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'

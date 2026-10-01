@@ -10,7 +10,6 @@ import { OverlayService } from '../../services/overlay.service';
  */
 @Component({
   selector: 'app-contact',
-  standalone: true,
   imports: [CommonModule, ContactListComponent, SingleContactComponent],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'

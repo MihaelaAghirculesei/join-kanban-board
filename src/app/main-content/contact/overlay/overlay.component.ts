@@ -13,7 +13,6 @@ import { TaskComponent } from '../../task/task.component';
  */
 @Component({
   selector: 'app-overlay',
-  standalone: true,
   imports: [CommonModule, FormsModule, AddContactComponent, AddTaskComponent, TaskComponent],
   templateUrl: './overlay.component.html',
   styleUrl: './overlay.component.scss',
