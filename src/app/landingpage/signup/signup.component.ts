@@ -128,30 +128,16 @@ validatePrivacy() {
     if(this.password === this.passwordConfirm){
       try {
         await this.authService.register(this.email, this.password, this.name);
-        if(!this.checkIfMailinUseInContact()){
+        if(!(await this.contactService.emailExists(this.email))){
           await this.contactService.addContact({name:this.name,email: this.email, phone: 'Not existing yet'})
         }
-        this.authService.UserLoggedIn = this.authService.getUsername(this.email);
+        this.authService.UserLoggedIn = this.name;
         this.router.navigate(['/login']);
         this.feedbackService.show('Registration successfull');
       } catch (err: any) {
         this.error = err.message;
       }
     }
-  }
-
-  /**
-   * Checks if the email is already used in the contact list.
-   * @returns Boolean indicating if the email is already in use
-   */
-  checkIfMailinUseInContact(): boolean {
-    let include = false;
-    this.contactService.contactList.forEach(c => {
-      if(this.email == c.email){
-        include = true;
-      }
-    });
-    return include;
   }
 
   /**

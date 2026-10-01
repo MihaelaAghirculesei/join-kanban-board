@@ -1,0 +1,37 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Shared board: every signed-in user (including the guest account)
+    // can manage tasks and contacts.
+    match /tasks/{taskId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /contacts/{contactId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /users/{userId} {
+      // Users read and maintain only their own profile.
+      allow get: if isSignedIn() && request.auth.uid == userId;
+      allow create, update: if isSignedIn()
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['username', 'email']);
+      allow delete: if false;
+
+      // Login with a username looks up exactly one profile before signing in.
+      allow list: if request.query.limit == 1;
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

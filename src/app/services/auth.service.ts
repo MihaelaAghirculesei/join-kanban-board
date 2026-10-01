@@ -15,11 +15,12 @@ import {
   collection,
   query,
   where,
+  limit,
   doc,
+  getDoc,
   getDocs,
   setDoc,
 } from '@angular/fire/firestore';
-import { ContactService } from './contact.service';
 import { Router } from '@angular/router';
 import { FeedbackServiceService } from './feedback.service';
 
@@ -34,9 +35,6 @@ export class AuthService {
   
   /** Current logged in user stored in local storage */
   UserLoggedIn: string|null = localStorage.getItem('loggedIn');
-  
-  /** Contact service injection */
-  contactService= inject(ContactService);
   
   /** Router injection */
   router= inject(Router);
@@ -61,7 +59,7 @@ export class AuthService {
     let email = emailOrUsername;
     const isEmail = emailOrUsername.includes('@');
     if (!isEmail) {
-      const q = query(collection(this.firestore, 'users'), where('username', '==', emailOrUsername));
+      const q = query(collection(this.firestore, 'users'), where('username', '==', emailOrUsername), limit(1));
       const result = await getDocs(q);
       if (result.empty) {
         throw new Error('Username not found');
@@ -70,6 +68,16 @@ export class AuthService {
       email = userData['email'];
     }
     return signInWithEmailAndPassword(this.auth, email, password);
+  }
+
+  /**
+   * Reads the display name stored in the signed-in user's profile document
+   * @param uid - Firebase user id
+   * @returns The stored username, or an empty string if there is none
+   */
+  async getProfileName(uid: string): Promise<string> {
+    const profile = await getDoc(doc(this.firestore, 'users', uid));
+    return profile.exists() ? profile.data()['username'] ?? '' : '';
   }
 
   /**
@@ -98,21 +106,6 @@ export class AuthService {
       }
       throw error;
     }
-  }
-
-  /**
-   * Get username from email address
-   * @param email - User's email address
-   * @returns Username corresponding to the email
-   */
-  getUsername(email:string){
-    let userName='';
-    this.contactService.contactList.forEach(c =>{
-      if(c.email == email){          
-        userName=  c.name;
-      }
-    });
-    return userName;
   }
 
   /**

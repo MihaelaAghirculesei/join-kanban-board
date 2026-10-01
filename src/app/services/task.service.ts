@@ -10,6 +10,8 @@ import {
   deleteDoc,
   updateDoc,
 } from '@angular/fire/firestore';
+import { Auth, authState } from '@angular/fire/auth';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Task } from '../interfaces/task';
 import { query, orderBy, limit } from 'firebase/firestore';
 import { ContactService } from './contact.service';
@@ -66,10 +68,12 @@ export class TaskService implements OnDestroy {
   };
 
   /**
-   * Initializes the TaskService and starts listening to task changes.
+   * Initializes the TaskService and listens to task changes while a user is signed in.
    */
   constructor() {
-    this.snap();
+    authState(inject(Auth))
+      .pipe(takeUntilDestroyed())
+      .subscribe((user) => (user ? this.snap() : this.stopListening()));
   }
 
   /**
@@ -134,6 +138,7 @@ export class TaskService implements OnDestroy {
    * Subscribes to Firestore task changes and updates the local task lists.
    */
   snap() {
+    this.unsubTasksList?.();
     let q = query(this.getTasksRef(), orderBy('priority'));
     this.unsubTasksList = onSnapshot(q, (list) => {
       this.tasksList = [];
@@ -143,7 +148,18 @@ export class TaskService implements OnDestroy {
       this.fillBoardTaskLists();
       this.isBoardListFull = true;
       this.isTasksLoaded.set(true);
-    });
+    }, (err) => console.error(err));
+  }
+
+  /**
+   * Stops listening to task changes and clears the local task lists (e.g. after logout).
+   */
+  stopListening() {
+    this.unsubTasksList?.();
+    this.unsubTasksList = undefined;
+    this.tasksList = [];
+    this.fillBoardTaskLists();
+    this.isTasksLoaded.set(false);
   }
 
   /**
@@ -193,9 +209,7 @@ export class TaskService implements OnDestroy {
    * Cleans up the Firestore subscription on service destroy.
    */
   ngOnDestroy() {
-    if (this.unsubTasksList()) {
-      this.unsubTasksList();
-    }
+    this.unsubTasksList?.();
   }
 
   /**
