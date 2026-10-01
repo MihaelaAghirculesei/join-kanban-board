@@ -1,5 +1,6 @@
-@import './../../styles/variables.scss';
-@import './../../styles/mixins.scss';
+@use 'sass:color';
+@use './../../styles/variables' as *;
+@use './../../styles/mixins' as *;
 
 section {
   @include displayFlex(flex, column, flex-start, flex-start, 24px, nowrap);
@@ -33,7 +34,7 @@ section {
         height: 16px;
       }
       &:hover {
-        background-color: darken($grey, 0.5);
+        background-color: color.adjust($grey, $lightness: -0.5%);
       }
     }
   }

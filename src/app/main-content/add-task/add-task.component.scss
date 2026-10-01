@@ -1,8 +1,9 @@
-@import './../../styles/variables.scss';
-@import './../../styles/mixins.scss';
-@import './subtask-style.component.scss';
-@import './custom-checkbox.component.scss';
-@import './host-style.component.scss';
+@use 'sass:color';
+@use './../../styles/variables' as *;
+@use './../../styles/mixins' as *;
+@use './subtask-style.component';
+@use './custom-checkbox.component';
+@use './host-style.component';
 
 section {
   @include displayFlex(flex, column, flex-start, flex-start, 24px);
@@ -24,7 +25,7 @@ section {
         height: 16px;
       }
       &:hover {
-        background-color: darken($grey, 0.5);
+        background-color: color.adjust($grey, $lightness: -0.5%);
       }
     }
   }
