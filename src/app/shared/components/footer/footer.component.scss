@@ -1,5 +1,5 @@
-@import './../../../styles/variables.scss';
-@import './../../../styles/mixins.scss';
+@use './../../../styles/variables' as *;
+@use './../../../styles/mixins' as *;
 
 .sidebar-footer {
   @include displayFlex(flex, column, flex-end, flex-start, 0, nowrap);

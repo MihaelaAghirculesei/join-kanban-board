@@ -1,5 +1,6 @@
-@import './../../../styles/variables.scss';
-@import './../../../styles/mixins.scss';
+@use 'sass:color';
+@use './../../../styles/variables' as *;
+@use './../../../styles/mixins' as *;
 
 .overlay {
   position: fixed;
@@ -50,7 +51,7 @@
           height: 16px;
         }
     &:hover {
-      background-color: darken($grey, 0.5);
+      background-color: color.adjust($grey, $lightness: -0.5%);
     }
   }
   }

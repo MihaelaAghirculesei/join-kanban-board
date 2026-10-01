@@ -1,7 +1,7 @@
-@import './app/styles/fonts.scss';
-@import './app/styles/variables.scss';
-@import './app/styles/mixins.scss';
-@import './app/styles/buttons.scss';
+@use './app/styles/fonts';
+@use './app/styles/variables' as *;
+@use './app/styles/mixins' as *;
+@use './app/styles/buttons';
 
 * {
   margin: 0;
