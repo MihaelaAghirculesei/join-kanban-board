@@ -12,13 +12,8 @@ import {
 } from '@angular/fire/auth';
 import {
   Firestore,
-  collection,
-  query,
-  where,
-  limit,
   doc,
   getDoc,
-  getDocs,
   setDoc,
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -50,23 +45,12 @@ export class AuthService {
   constructor(private auth: Auth, private firestore: Firestore) {}
 
   /**
-   * Login a user with email/username and password
-   * @param emailOrUsername - User's email or username
+   * Login a user with email and password
+   * @param email - User's email
    * @param password - User's password
    * @returns Firebase user credential promise
    */
-  async login(emailOrUsername: string, password: string) {
-    let email = emailOrUsername;
-    const isEmail = emailOrUsername.includes('@');
-    if (!isEmail) {
-      const q = query(collection(this.firestore, 'users'), where('username', '==', emailOrUsername), limit(1));
-      const result = await getDocs(q);
-      if (result.empty) {
-        throw new Error('Username not found');
-      }
-      const userData = result.docs[0].data();
-      email = userData['email'];
-    }
+  login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 

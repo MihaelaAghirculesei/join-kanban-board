@@ -29,7 +29,7 @@ the board with drag and drop. All data is stored in Cloud Firestore and synchron
 
 ## Features
 
-- **Authentication** – sign up, login with email *or* username, guest login (Firebase Authentication)
+- **Authentication** – sign up, login with email and password, guest login (Firebase Authentication)
 - **Protected routes** – app pages require a signed-in user (functional route guard)
 - **Summary dashboard** – counts per column, urgent tasks and the next urgent deadline
 - **Kanban board** – four columns (To do, In progress, Await feedback, Done), drag and drop on
