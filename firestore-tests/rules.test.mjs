@@ -29,10 +29,10 @@ const cases = [
   ['anon cannot write tasks', () => assertFails(addDoc(collection(anon, 'tasks'), { title: 'x' }))],
   ['anon cannot list all users', () => assertFails(getDocs(collection(anon, 'users')))],
   ['anon cannot get a user profile', () => assertFails(getDoc(doc(anon, 'users/alice')))],
-  ['anon can look up one username (login)', () =>
-    assertSucceeds(getDocs(query(collection(anon, 'users'), where('username', '==', 'alice'), limit(1))))],
-  ['anon cannot look up two profiles', () =>
-    assertFails(getDocs(query(collection(anon, 'users'), where('username', '==', 'alice'), limit(2))))],
+  ['anon cannot look up a profile by username', () =>
+    assertFails(getDocs(query(collection(anon, 'users'), where('username', '==', 'alice'), limit(1))))],
+  ['signed-in user cannot list profiles', () =>
+    assertFails(getDocs(query(collection(alice, 'users'), limit(1))))],
   // signed-in users
   ['user reads tasks ordered by priority', () => assertSucceeds(getDocs(query(collection(alice, 'tasks'), orderBy('priority'))))],
   ['user creates, updates and deletes a task', async () => {

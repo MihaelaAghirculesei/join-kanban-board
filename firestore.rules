@@ -24,9 +24,8 @@ service cloud.firestore {
         && request.auth.uid == userId
         && request.resource.data.keys().hasOnly(['username', 'email']);
       allow delete: if false;
-
-      // Login with a username looks up exactly one profile before signing in.
-      allow list: if request.query.limit == 1;
+      // Profiles can never be listed.
+      allow list: if false;
     }
 
     // Everything else is closed.
