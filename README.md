@@ -8,7 +8,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-join--aghirculesei.pages.dev-success?style=for-the-badge)](https://join-aghirculesei.pages.dev)
 [![CI](https://github.com/MihaelaAghirculesei/join-kanban-board/actions/workflows/ci.yml/badge.svg)](https://github.com/MihaelaAghirculesei/join-kanban-board/actions/workflows/ci.yml)
-[![Angular](https://img.shields.io/badge/Angular-17-DD0031?style=flat&logo=angular)](https://angular.dev/)
+[![Angular](https://img.shields.io/badge/Angular-20-DD0031?style=flat&logo=angular)](https://angular.dev/)
 [![Firebase](https://img.shields.io/badge/Firebase-Auth_%26_Firestore-FFCA28?style=flat&logo=firebase)](https://firebase.google.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 
@@ -45,17 +45,17 @@ the board with drag and drop. All data is stored in Cloud Firestore and synchron
 
 | Area | Technology |
 |------|------------|
-| Framework | Angular 17 (standalone components, signals, new control flow, lazy-loaded routes) |
+| Framework | Angular 20 (standalone components, signals, new control flow, lazy-loaded routes) |
 | Language | TypeScript (strict mode, strict templates) |
 | Backend | Firebase Authentication, Cloud Firestore via `@angular/fire` |
-| UI | SCSS, self-hosted Inter font, Angular CDK drag and drop |
-| Testing | Karma + Jasmine |
-| CI | GitHub Actions (build + unit tests) |
+| UI | SCSS (Sass modules), self-hosted Inter font, Angular CDK drag and drop |
+| Testing | Karma + Jasmine; Firestore security rules tested on the Firebase emulator |
+| CI | GitHub Actions (build, unit tests, security rules tests); Dependabot for dependency updates |
 | Hosting | Cloudflare Pages |
 
 ## Getting started
 
-Requirements: Node.js 20 and npm.
+Requirements: Node.js 22 (see `.node-version`) and npm.
 
 ```bash
 git clone https://github.com/MihaelaAghirculesei/join-kanban-board.git
@@ -78,8 +78,17 @@ npm start            # http://localhost:4200
 The Firebase web config lives in `src/app/app.config.ts`. A Firebase web API key is not a secret –
 it only identifies the project. Access is protected by:
 
-- **Firestore security rules** (managed in the Firebase console)
+- **Firestore security rules** – versioned in [`firestore.rules`](./firestore.rules): only signed-in users can read or write tasks and contacts, and every user can only access their own profile
 - **API key restrictions** in the Google Cloud console (HTTP referrers limited to the deployed domain and `localhost`)
+
+Deploy the rules with the Firebase CLI (`firebase deploy --only firestore:rules`) or paste them into the Firebase console.
+The rules are covered by tests that run against the Firestore emulator (Java required):
+
+```bash
+cd firestore-tests
+npm ci
+npm test
+```
 
 Unit tests never talk to this project: they use an isolated `demo-` Firebase app with networking
 disabled (`src/testing/test-providers.ts`).
@@ -96,6 +105,8 @@ src/app
 ├── shared/components/ # header (+ help, legal notice, privacy), sidebar, footer
 └── styles/            # variables, mixins, buttons, fonts
 src/testing/           # shared providers for unit tests
+firestore.rules        # Firestore security rules
+firestore-tests/       # security rules tests (Firestore emulator)
 ```
 
 ## Screenshots
@@ -124,14 +135,16 @@ of the login and sign-up pages.
 
 ## What I improved after the team phase
 
-- **Security** – route guard so app pages are no longer reachable without signing in
+- **Security** – route guard for app pages; Firestore security rules with 17 emulator tests in CI; data is only loaded after login
+- **Upgrade** – Angular 17 → 20, AngularFire 17 → 20, TypeScript 5.9, `@angular/build`, Node.js 22 – one major version at a time with the official migrations
+- **Dependencies** – npm audit from 97 findings to 0, unused packages removed, Dependabot for ongoing updates
 - **Testing** – repaired the test suite (it did not compile and most specs lacked providers) with shared, network-free test providers; added a guard test
-- **CI** – GitHub Actions pipeline for build and tests
+- **CI** – GitHub Actions pipeline for build, unit tests and security rules tests
 - **Performance** – lazy-loaded pages (initial bundle 1.13 MB → 0.82 MB), removed an unused Angular
   Material theme (global CSS 93 kB → 9 kB) and unused Google Fonts requests
 - **Privacy** – no more requests to Google Fonts, complete privacy policy and legal notice for this deployment
 - **Accessibility** – keyboard-accessible user menu with proper ARIA attributes
-- **Code quality** – removed dead code and debug output, fixed naming, null-safe task details, realistic build budgets
+- **Code quality** – removed dead code and debug output, fixed naming, null-safe task details, realistic build budgets, Sass module system instead of the deprecated `@import`, no more duplicated global styles in components
 - **Deployment** – moved to Cloudflare Pages served from the domain root
 
 ## Contact
