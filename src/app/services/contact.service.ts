@@ -7,7 +7,7 @@ import { Injectable, OnDestroy, effect} from '@angular/core';
 import { inject } from '@angular/core';
 import { Firestore, collectionData, collection, doc, onSnapshot, addDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
 import { Contact } from '../interfaces/contact';
-import { query, orderBy, limit } from 'firebase/firestore';
+import { query, orderBy, limit, where, getDocs } from 'firebase/firestore';
 import { TaskService } from './task.service';
 import { OverlayService } from './overlay.service';
 
@@ -276,6 +276,16 @@ export class ContactService implements OnDestroy{
    * Gets reference to contacts collection
    * @returns {CollectionReference} Firestore collection reference
    */
+  /**
+   * Checks in Firestore whether a contact with the given email already exists
+   * @param {string} email - Email address to look up
+   * @returns {Promise<boolean>} True if a matching contact exists
+   */
+  async emailExists(email: string): Promise<boolean> {
+    const q = query(this.getContactsRef(), where('email', '==', email), limit(1));
+    return !(await getDocs(q)).empty;
+  }
+
   getContactsRef(){
     return collection(this.firestore, 'contacts');
   }

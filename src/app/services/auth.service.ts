@@ -21,7 +21,6 @@ import {
   getDocs,
   setDoc,
 } from '@angular/fire/firestore';
-import { ContactService } from './contact.service';
 import { Router } from '@angular/router';
 import { FeedbackServiceService } from './feedback.service';
 
@@ -36,9 +35,6 @@ export class AuthService {
   
   /** Current logged in user stored in local storage */
   UserLoggedIn: string|null = localStorage.getItem('loggedIn');
-  
-  /** Contact service injection */
-  contactService= inject(ContactService);
   
   /** Router injection */
   router= inject(Router);
@@ -110,21 +106,6 @@ export class AuthService {
       }
       throw error;
     }
-  }
-
-  /**
-   * Get username from email address
-   * @param email - User's email address
-   * @returns Username corresponding to the email
-   */
-  getUsername(email:string){
-    let userName='';
-    this.contactService.contactList.forEach(c =>{
-      if(c.email == email){          
-        userName=  c.name;
-      }
-    });
-    return userName;
   }
 
   /**
