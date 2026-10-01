@@ -6,6 +6,8 @@
 import { Injectable, OnDestroy, effect} from '@angular/core';
 import { inject } from '@angular/core';
 import { Firestore, collectionData, collection, doc, onSnapshot, addDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
+import { Auth, authState } from '@angular/fire/auth';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Contact } from '../interfaces/contact';
 import { query, orderBy, limit, where, getDocs } from 'firebase/firestore';
 import { TaskService } from './task.service';
@@ -89,7 +91,9 @@ export class ContactService implements OnDestroy{
    * @description Sets up initial state and listeners
    */
   constructor() {
-    this.snap();
+    authState(inject(Auth))
+      .pipe(takeUntilDestroyed())
+      .subscribe((user) => (user ? this.snap() : this.stopListening()));
     this.checkContactListLetters();
     effect(() => {
       if (this.overlayService.setTemplate() === 'edit-task') {
@@ -127,6 +131,7 @@ export class ContactService implements OnDestroy{
    * @description Updates contactList on changes
    */
   snap(){
+    this.unsubContactList?.();
     let q = query(this.getContactsRef(), orderBy('name'));
     this.unsubContactList = onSnapshot(q, (list)=>{
       this.contactList= [];
@@ -134,7 +139,17 @@ export class ContactService implements OnDestroy{
           this.contactList.push(this.setContactObj(element.data(), element.id));
       })
       this.checkContactListLetters();
-    });
+    }, (err) => console.error(err));
+  }
+
+  /**
+   * Stops listening to contact changes and clears the local list (e.g. after logout)
+   */
+  stopListening(){
+    this.unsubContactList?.();
+    this.unsubContactList = undefined;
+    this.contactList = [];
+    this.checkContactListLetters();
   }
 
   /**
@@ -170,9 +185,7 @@ export class ContactService implements OnDestroy{
    * @description Unsubscribes from Firestore listeners
    */
   ngOnDestroy(){
-    if(this.unsubContactList()){
-      this.unsubContactList();
-    }
+    this.unsubContactList?.();
   }
 
   /**
