@@ -9,7 +9,6 @@ import { AuthService } from '../../services/auth.service';
  */
 @Component({
   selector: 'app-summary',
-  standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss',

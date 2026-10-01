@@ -19,7 +19,6 @@ import { SignupComponent } from '../../landingpage/signup/signup.component';
  */
 @Component({
   selector: 'app-add-task',
-  standalone: true,
   imports: [NgClass, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss',
