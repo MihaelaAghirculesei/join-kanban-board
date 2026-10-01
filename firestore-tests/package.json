@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "description": "Checks firestore.rules against the local Firestore emulator",
+  "overrides": {
+    "@grpc/grpc-js": "^1.13.6"
+  },
   "scripts": {
     "test": "npx --yes firebase-tools@15 emulators:exec --only firestore --project demo-join-rules --config firebase.json \"node rules.test.mjs\""
   },
