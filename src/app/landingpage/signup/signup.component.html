@@ -20,7 +20,7 @@
         <span [ngClass]="{ visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name') }">Please enter a name (at least 2 characters)</span>
 
         <div class="input-wrapper">
-          <input type="email" placeholder="Email" autocomplete="email" required name="email" [(ngModel)]="email" (blur)="validateForm('email')" (ngModelChange)="validateForm('email'); this.authService.emailAlreadyUsed = false" [class.invalid]="invalidFields.includes('email')"[class.invalid]="invalidFields.includes('email') || authService.emailAlreadyUsed == true" />
+          <input type="email" placeholder="Email" autocomplete="email" required name="email" [(ngModel)]="email" (blur)="validateForm('email')" (ngModelChange)="validateForm('email'); this.authService.emailAlreadyUsed = false" [class.invalid]="invalidFields.includes('email') || authService.emailAlreadyUsed" />
           <img src="assets/img/login/mail.svg" alt="Email icon" />
         </div>
         <span [ngClass]="{ visible: invalidFields.includes('email') || authService.emailAlreadyUsed == true, invisible: !invalidFields.includes('email') }">Your email seems invalid or is already existing</span>
