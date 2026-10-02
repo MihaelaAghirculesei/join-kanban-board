@@ -59,3 +59,21 @@ jobs:
             echo "$body" | grep -q '<app-root' || { echo "::error::$path does not serve the app"; exit 1; }
             echo "OK $path"
           done
+
+  angular-support:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Angular version is still supported
+        run: |
+          major=$(jq -r '.dependencies["@angular/core"]' package.json | grep -o '[0-9]\+' | head -1)
+          eol=$(curl --fail --silent --retry 3 https://endoflife.date/api/angular.json | jq -r --arg c "$major" '.[] | select(.cycle == $c) | .eol')
+          days=$(( ( $(date -d "$eol" +%s) - $(date +%s) ) / 86400 ))
+          echo "Angular $major: end of support $eol ($days days left)"
+          if [ "$days" -le 30 ]; then
+            echo "::error::Angular $major reaches end of support on $eol – upgrade to the next major version (ng update)."
+            exit 1
+          elif [ "$days" -le 60 ]; then
+            echo "::warning::Angular $major reaches end of support on $eol – plan the upgrade."
+          fi
