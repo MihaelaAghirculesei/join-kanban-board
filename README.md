@@ -8,7 +8,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-join--aghirculesei.pages.dev-success?style=for-the-badge)](https://join-aghirculesei.pages.dev)
 [![CI](https://github.com/MihaelaAghirculesei/join-kanban-board/actions/workflows/ci.yml/badge.svg)](https://github.com/MihaelaAghirculesei/join-kanban-board/actions/workflows/ci.yml)
-[![Angular](https://img.shields.io/badge/Angular-20-DD0031?style=flat&logo=angular)](https://angular.dev/)
+[![Angular](https://img.shields.io/badge/Angular-22-DD0031?style=flat&logo=angular)](https://angular.dev/)
 [![Firebase](https://img.shields.io/badge/Firebase-Auth_%26_Firestore-FFCA28?style=flat&logo=firebase)](https://firebase.google.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 
@@ -45,9 +45,9 @@ the board with drag and drop. All data is stored in Cloud Firestore and synchron
 
 | Area | Technology |
 |------|------------|
-| Framework | Angular 20 (standalone components, signals, new control flow, lazy-loaded routes) |
+| Framework | Angular 22 (standalone components, signals, new control flow, lazy-loaded routes) |
 | Language | TypeScript (strict mode, strict templates) |
-| Backend | Firebase Authentication, Cloud Firestore via `@angular/fire` |
+| Backend | Firebase Authentication and Cloud Firestore via the official Firebase JS SDK (small DI wrapper in `src/app/firebase.ts`) |
 | UI | SCSS (Sass modules), self-hosted Inter font, Angular CDK drag and drop |
 | Testing | Karma + Jasmine; Firestore security rules tested on the Firebase emulator |
 | CI | GitHub Actions (build, unit tests, security rules tests, weekly health check), CodeQL; Dependabot for dependency updates |
@@ -55,7 +55,7 @@ the board with drag and drop. All data is stored in Cloud Firestore and synchron
 
 ## Getting started
 
-Requirements: Node.js 22 (see `.node-version`) and npm.
+Requirements: Node.js 22.22.3+ (see `.node-version`) and npm.
 
 ```bash
 git clone https://github.com/MihaelaAghirculesei/join-kanban-board.git
@@ -136,7 +136,7 @@ of the login and sign-up pages.
 ## What I improved after the team phase
 
 - **Security** – route guard for app pages; Firestore security rules with 17 emulator tests in CI; data is only loaded after login
-- **Upgrade** – Angular 17 → 20, AngularFire 17 → 20, TypeScript 5.9, `@angular/build`, Node.js 22 – one major version at a time with the official migrations
+- **Upgrade** – Angular 17 → 22, TypeScript 6.0, `@angular/build`, Node.js 22 – one major version at a time with the official migrations; AngularFire replaced by the official Firebase SDK, so Angular upgrades no longer wait for AngularFire releases
 - **Dependencies** – npm audit from 97 findings to 0, unused packages removed, Dependabot for ongoing updates
 - **Testing** – repaired the test suite (it did not compile and most specs lacked providers) with shared, network-free test providers; added a guard test
 - **CI** – GitHub Actions pipeline for build, unit tests and security rules tests
