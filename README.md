@@ -64,6 +64,8 @@ npm ci
 npm start            # http://localhost:4200
 ```
 
+> Use port 4200 for local development: the Firebase API key only accepts `localhost:4200` besides the deployed domains.
+
 ### Scripts
 
 | Command | Description |
@@ -79,7 +81,7 @@ The Firebase web config lives in `src/app/app.config.ts`. A Firebase web API key
 it only identifies the project. Access is protected by:
 
 - **Firestore security rules** – versioned in [`firestore.rules`](./firestore.rules): only signed-in users can read or write tasks and contacts, and every user can only access their own profile
-- **API key restrictions** in the Google Cloud console (HTTP referrers limited to the deployed domain and `localhost`)
+- **API key restrictions** in the Google Cloud console: HTTP referrers limited to the deployed domains and `localhost:4200`, and only the APIs Firebase needs (Identity Toolkit, Token Service, Cloud Firestore)
 
 Deploy the rules with the Firebase CLI (`firebase deploy --only firestore:rules`) or paste them into the Firebase console.
 The rules are covered by tests that run against the Firestore emulator (Java required):
@@ -97,6 +99,7 @@ disabled (`src/testing/test-providers.ts`).
 
 ```
 src/app
+├── firebase.ts        # Firebase providers (app, Auth, Firestore) and authState()
 ├── guards/            # authGuard (route protection)
 ├── interfaces/        # Task, Contact, Userdata
 ├── landingpage/       # login, sign-up
@@ -135,15 +138,15 @@ of the login and sign-up pages.
 
 ## What I improved after the team phase
 
-- **Security** – route guard for app pages; Firestore security rules with 17 emulator tests in CI; data is only loaded after login
+- **Security** – route guard for app pages; Firestore security rules with 17 emulator tests in CI; data is only loaded after login; Firebase API key restricted by domain and API
 - **Upgrade** – Angular 17 → 22, TypeScript 6.0, `@angular/build`, Node.js 22 – one major version at a time with the official migrations; AngularFire replaced by the official Firebase SDK, so Angular upgrades no longer wait for AngularFire releases
-- **Dependencies** – npm audit from 97 findings to 0, unused packages removed, Dependabot for ongoing updates
-- **Testing** – repaired the test suite (it did not compile and most specs lacked providers) with shared, network-free test providers; added a guard test
-- **CI** – GitHub Actions pipeline for build, unit tests and security rules tests
-- **Performance** – lazy-loaded pages (initial bundle 1.13 MB → 0.82 MB), removed an unused Angular
+- **Dependencies** – npm audit from 97 findings to 0, unused packages removed, Dependabot for ongoing updates; firebase 12 deliberately postponed because it adds 205 kB to the initial bundle ([firebase-js-sdk#10424](https://github.com/firebase/firebase-js-sdk/issues/10424))
+- **Testing** – repaired the test suite (it did not compile and most specs lacked providers) with shared, network-free test providers; tests for the route guard and the Firebase providers
+- **CI** – GitHub Actions for build, unit tests and security rules tests on every pull request, CodeQL code scanning, a protected `master` branch (pull requests with green checks only) and a weekly health check (audit, build, live site, Angular end of support)
+- **Performance** – lazy-loaded pages and no AngularFire (initial bundle 1.13 MB → 0.90 MB), removed an unused Angular
   Material theme (global CSS 93 kB → 9 kB) and unused Google Fonts requests
 - **Privacy** – no more requests to Google Fonts, complete privacy policy and legal notice for this deployment
-- **Accessibility** – keyboard-accessible user menu with proper ARIA attributes
+- **Accessibility** – keyboard-accessible user menu with proper ARIA attributes; autocomplete hints on the login and sign-up forms for password managers
 - **Code quality** – removed dead code and debug output, fixed naming, null-safe task details, realistic build budgets, Sass module system instead of the deprecated `@import`, no more duplicated global styles in components
 - **Deployment** – moved to Cloudflare Pages served from the domain root
 
