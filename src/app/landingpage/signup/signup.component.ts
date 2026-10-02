@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
 import { FeedbackServiceService } from '../../services/feedback.service';
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
   selector: 'app-signup',
   imports: [FormsModule, NgClass],
   templateUrl: './signup.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {

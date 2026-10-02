@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 /**
@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-privacy-policy',
   imports: [RouterLink],
   templateUrl: './privacy-policy.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './privacy-policy.component.scss'
 })
 export class PrivacyPolicyComponent {

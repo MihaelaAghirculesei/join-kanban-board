@@ -1,4 +1,4 @@
-import { Component, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, ViewChild, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactService } from '../../../services/contact.service';
 import { OverlayService } from '../../../services/overlay.service';
@@ -10,6 +10,7 @@ import { OverlayService } from '../../../services/overlay.service';
   selector: 'app-contact-list',
   imports: [CommonModule],
   templateUrl: './contact-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {

@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild, HostListener, signal } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild, HostListener, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ import { Router, RouterLink } from '@angular/router';
   selector: 'app-board',
   imports: [CommonModule, FormsModule, CdkDrag, CdkDropList, CdkDragPreview, RouterLink],
   templateUrl: './board.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './board.component.scss',
 })
 export class BoardComponent  {

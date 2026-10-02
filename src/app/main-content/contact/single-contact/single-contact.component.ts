@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ContactService } from '../../../services/contact.service';
 import { CommonModule } from '@angular/common';
 import { OverlayComponent } from '../overlay/overlay.component';
@@ -12,6 +12,7 @@ import { OverlayService } from '../../../services/overlay.service';
   selector: 'app-single-contact',
   imports: [CommonModule],
   templateUrl: './single-contact.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './single-contact.component.scss'
 })
 export class SingleContactComponent {

@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject, effect } from '@angular/core';
+import { Component, signal, computed, inject, effect, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TaskService } from '../../services/task.service';
@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-summary',
   imports: [CommonModule, RouterModule],
   templateUrl: './summary.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './summary.component.scss',
 })
 export class SummaryComponent {

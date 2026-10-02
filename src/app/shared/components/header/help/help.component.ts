@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 /**
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-help',
   imports: [],
   templateUrl: './help.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './help.component.scss',
 })
 export class HelpComponent {
