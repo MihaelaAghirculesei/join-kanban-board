@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, Output, EventEmitter, HostListener, ElementRef, signal, effect  } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter, HostListener, ElementRef, signal, effect, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 import { ContactService } from '../../../services/contact.service';
@@ -15,6 +15,7 @@ import { TaskComponent } from '../../task/task.component';
   selector: 'app-overlay',
   imports: [CommonModule, FormsModule, AddContactComponent, AddTaskComponent, TaskComponent],
   templateUrl: './overlay.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './overlay.component.scss',
 })
 export class OverlayComponent {

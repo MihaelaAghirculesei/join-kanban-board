@@ -1,5 +1,5 @@
 import { NgClass, CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, inject, ViewChild, effect, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, ViewChild, effect, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm, NgModel, FormsModule, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
@@ -21,6 +21,7 @@ import { SignupComponent } from '../../landingpage/signup/signup.component';
   selector: 'app-add-task',
   imports: [NgClass, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-task.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './add-task.component.scss',
 })
 export class AddTaskComponent {

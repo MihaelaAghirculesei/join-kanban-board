@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, Output, EventEmitter, HostListener, ElementRef, inject } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter, HostListener, ElementRef, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 import { ContactService } from '../../../services/contact.service';
@@ -13,6 +13,7 @@ import { OverlayService } from '../../../services/overlay.service';
   selector: 'app-add-contact',
   imports: [CommonModule, FormsModule],
   templateUrl: './add-contact.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './add-contact.component.scss',
 })
 export class AddContactComponent {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FooterComponent } from "../footer/footer.component";
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
@@ -11,6 +11,7 @@ import { AuthService } from '../../../services/auth.service';
   selector: 'app-sidebar',
   imports: [FooterComponent, RouterModule],
   templateUrl: './sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {

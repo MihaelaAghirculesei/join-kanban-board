@@ -1,4 +1,4 @@
-import { Component, inject, effect } from '@angular/core';
+import { Component, inject, effect, ChangeDetectionStrategy } from '@angular/core';
 import { OverlayService } from '../../services/overlay.service';
 import { TaskService } from '../../services/task.service';
 import { ContactService } from '../../services/contact.service';
@@ -14,6 +14,7 @@ import { NgModel, FormsModule } from '@angular/forms';
   selector: 'app-task',
   imports: [NgStyle, NgClass, FormsModule, DatePipe],
   templateUrl: './task.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './task.component.scss'
 })
 export class TaskComponent {

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, HostListener, inject } from '@angular/core';
+import { Component, ViewChild, ElementRef, HostListener, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { ContactService } from '../../../services/contact.service';
@@ -11,6 +11,7 @@ import { ContactService } from '../../../services/contact.service';
   selector: 'app-header',
   imports: [RouterModule],
   templateUrl: './header.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {

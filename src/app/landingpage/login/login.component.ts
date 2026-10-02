@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { RouterLink } from '@angular/router';
@@ -15,6 +15,7 @@ import { NgClass, CommonModule } from '@angular/common';
   selector: 'app-login',
   imports: [FormsModule, NgClass, RouterLink],
   templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
