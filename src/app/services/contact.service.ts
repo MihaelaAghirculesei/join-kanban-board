@@ -5,11 +5,10 @@
  */
 import { Injectable, OnDestroy, effect} from '@angular/core';
 import { inject } from '@angular/core';
-import { Firestore, collectionData, collection, doc, onSnapshot, addDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
-import { Auth, authState } from '@angular/fire/auth';
+import { collection, doc, onSnapshot, addDoc, deleteDoc, updateDoc, query, orderBy, limit, where, getDocs } from 'firebase/firestore';
+import { AUTH, FIRESTORE, authState } from '../firebase';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Contact } from '../interfaces/contact';
-import { query, orderBy, limit, where, getDocs } from 'firebase/firestore';
 import { TaskService } from './task.service';
 import { OverlayService } from './overlay.service';
 
@@ -40,7 +39,7 @@ export class ContactService implements OnDestroy{
   unsubContactList: any;
   
   /** Firestore database instance */
-  firestore:Firestore = inject(Firestore);
+  firestore = inject(FIRESTORE);
   
   /** Task service injection */
   taskService = inject(TaskService);
@@ -91,7 +90,7 @@ export class ContactService implements OnDestroy{
    * @description Sets up initial state and listeners
    */
   constructor() {
-    authState(inject(Auth))
+    authState(inject(AUTH))
       .pipe(takeUntilDestroyed())
       .subscribe((user) => (user ? this.snap() : this.stopListening()));
     this.checkContactListLetters();
