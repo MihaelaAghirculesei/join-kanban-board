@@ -18,13 +18,17 @@ updates:
           - "jasmine*"
           - "@types/jasmine"
     ignore:
-      # Major Angular upgrades need `ng update` migrations and a matching AngularFire release
+      # Major Angular upgrades need `ng update` migrations (see the weekly health check reminder)
       - dependency-name: "@angular/*"
         update-types: ["version-update:semver-major"]
       - dependency-name: "@angular-devkit/*"
         update-types: ["version-update:semver-major"]
       - dependency-name: "typescript"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      # firebase 12 bundles re2js into the main Firestore entry (+205 kB initial bundle),
+      # see https://github.com/firebase/firebase-js-sdk/issues/10424 – remove once fixed
+      - dependency-name: "firebase"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: npm
     directory: /firestore-tests
