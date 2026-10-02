@@ -1,19 +1,18 @@
 import { Injectable, OnDestroy, signal } from '@angular/core';
 import { inject } from '@angular/core';
 import {
-  Firestore,
-  collectionData,
   collection,
   doc,
   onSnapshot,
   addDoc,
   deleteDoc,
   updateDoc,
-} from '@angular/fire/firestore';
-import { Auth, authState } from '@angular/fire/auth';
+  query,
+  orderBy,
+} from 'firebase/firestore';
+import { AUTH, FIRESTORE, authState } from '../firebase';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Task } from '../interfaces/task';
-import { query, orderBy, limit } from 'firebase/firestore';
 import { ContactService } from './contact.service';
 import { Contact } from '../interfaces/contact';
 import { FeedbackServiceService } from './feedback.service';
@@ -22,7 +21,7 @@ import { FeedbackServiceService } from './feedback.service';
   providedIn: 'root',
 })
 export class TaskService implements OnDestroy {
-  firestore: Firestore = inject(Firestore);
+  firestore = inject(FIRESTORE);
   feedbackService = inject(FeedbackServiceService)
   unsubTasksList: any;
   tasksList: Task[] = [];
@@ -71,7 +70,7 @@ export class TaskService implements OnDestroy {
    * Initializes the TaskService and listens to task changes while a user is signed in.
    */
   constructor() {
-    authState(inject(Auth))
+    authState(inject(AUTH))
       .pipe(takeUntilDestroyed())
       .subscribe((user) => (user ? this.snap() : this.stopListening()));
   }

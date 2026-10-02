@@ -5,17 +5,12 @@
  */
 import { Injectable, inject } from '@angular/core';
 import {
-  Auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-} from '@angular/fire/auth';
-import {
-  Firestore,
-  doc,
-  getDoc,
-  setDoc,
-} from '@angular/fire/firestore';
+} from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { AUTH, FIRESTORE } from '../firebase';
 import { Router } from '@angular/router';
 import { FeedbackServiceService } from './feedback.service';
 
@@ -37,12 +32,11 @@ export class AuthService {
   /** Feedback service injection */
   feedbackService= inject(FeedbackServiceService);
   
-  /**
-   * Constructor for AuthService
-   * @param auth - Firebase Auth instance
-   * @param firestore - Firebase Firestore instance
-   */
-  constructor(private auth: Auth, private firestore: Firestore) {}
+  /** Firebase Authentication instance */
+  private auth = inject(AUTH);
+
+  /** Cloud Firestore instance */
+  private firestore = inject(FIRESTORE);
 
   /**
    * Login a user with email and password
