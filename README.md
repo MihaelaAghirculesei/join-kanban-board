@@ -50,7 +50,7 @@ the board with drag and drop. All data is stored in Cloud Firestore and synchron
 | Backend | Firebase Authentication, Cloud Firestore via `@angular/fire` |
 | UI | SCSS (Sass modules), self-hosted Inter font, Angular CDK drag and drop |
 | Testing | Karma + Jasmine; Firestore security rules tested on the Firebase emulator |
-| CI | GitHub Actions (build, unit tests, security rules tests); Dependabot for dependency updates |
+| CI | GitHub Actions (build, unit tests, security rules tests, weekly health check), CodeQL; Dependabot for dependency updates |
 | Hosting | Cloudflare Pages |
 
 ## Getting started
