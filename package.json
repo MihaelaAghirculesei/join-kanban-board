@@ -16,6 +16,7 @@
   "engines": {
     "node": "^22.22.3 || ^24.15.0"
   },
+  "packageManager": "npm@10.9.8",
   "dependencies": {
     "@angular/animations": "^22.2.1",
     "@angular/cdk": "^22.2.1",

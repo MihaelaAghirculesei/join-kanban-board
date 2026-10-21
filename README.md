@@ -55,7 +55,7 @@ the board with drag and drop. All data is stored in Cloud Firestore and synchron
 
 ## Getting started
 
-Requirements: Node.js 22.22.3+ (see `.node-version`) and npm.
+Requirements: Node.js 22.22.3+ (see `.node-version`) and npm 10 (pinned as `packageManager`, CI checks that it matches the npm bundled with `.node-version`).
 
 ```bash
 git clone https://github.com/MihaelaAghirculesei/join-kanban-board.git
