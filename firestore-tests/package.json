@@ -2,6 +2,7 @@
   "name": "join-firestore-rules-tests",
   "private": true,
   "type": "module",
+  "packageManager": "npm@10.9.8",
   "description": "Checks firestore.rules against the local Firestore emulator",
   "overrides": {
     "@grpc/grpc-js": "^1.13.6"
