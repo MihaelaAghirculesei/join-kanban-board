@@ -24,6 +24,18 @@ jobs:
           node-version-file: .node-version
           cache: npm
 
+      # Dependabot writes lockfiles with the npm from packageManager; keep it equal to the npm bundled with .node-version
+      - name: Check npm version
+        run: |
+          actual="npm@$(npm -v)"
+          for file in package.json firestore-tests/package.json; do
+            expected="$(node -p "require('./$file').packageManager")"
+            if [ "$expected" != "$actual" ]; then
+              echo "::error file=$file::packageManager is $expected but .node-version ships $actual"
+              exit 1
+            fi
+          done
+
       - name: Install dependencies
         run: npm ci
 
