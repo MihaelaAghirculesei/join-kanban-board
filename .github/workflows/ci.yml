@@ -43,7 +43,7 @@ jobs:
         run: npx ng build
 
       - name: Unit tests
-        run: npx ng test --watch=false --browsers=ChromeHeadlessCI
+        run: npx ng test --watch=false
 
   firestore-rules:
     runs-on: ubuntu-latest
