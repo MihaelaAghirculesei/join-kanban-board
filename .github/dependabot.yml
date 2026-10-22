@@ -14,9 +14,9 @@ updates:
           - "typescript"
       testing:
         patterns:
-          - "karma*"
-          - "jasmine*"
-          - "@types/jasmine"
+          - "vitest"
+          - "@vitest/*"
+          - "jsdom"
     ignore:
       # Major Angular upgrades need `ng update` migrations (see the weekly health check reminder)
       - dependency-name: "@angular/*"
