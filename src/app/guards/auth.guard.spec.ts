@@ -17,7 +17,7 @@ describe('authGuard', () => {
       )
     );
 
-    expect(result instanceof UrlTree).toBeTrue();
+    expect(result instanceof UrlTree).toBe(true);
     expect(TestBed.inject(Router).serializeUrl(result as UrlTree)).toBe('/login');
   });
 });

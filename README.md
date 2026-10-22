@@ -49,7 +49,7 @@ the board with drag and drop. All data is stored in Cloud Firestore and synchron
 | Language | TypeScript (strict mode, strict templates) |
 | Backend | Firebase Authentication and Cloud Firestore via the official Firebase JS SDK (small DI wrapper in `src/app/firebase.ts`) |
 | UI | SCSS (Sass modules), self-hosted Inter font, Angular CDK drag and drop |
-| Testing | Karma + Jasmine; Firestore security rules tested on the Firebase emulator |
+| Testing | Vitest (Angular unit-test builder, jsdom); Firestore security rules tested on the Firebase emulator |
 | CI | GitHub Actions (build, unit tests, security rules tests, weekly health check), CodeQL; Dependabot for dependency updates |
 | Hosting | Cloudflare Pages |
 
@@ -73,7 +73,7 @@ npm start            # http://localhost:4200
 | `npm start` | Development server with live reload |
 | `npm run build` | Production build into `dist/project/browser` |
 | `npm run watch` | Development build in watch mode |
-| `npm test` | Unit tests (Karma, add `-- --watch=false --browsers=ChromeHeadless` for a single run) |
+| `npm test` | Unit tests with Vitest in watch mode (add `-- --watch=false` for a single run) |
 
 ### Firebase configuration
 
