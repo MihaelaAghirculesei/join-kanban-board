@@ -154,7 +154,7 @@ of the login and sign-up pages.
 
 **Mihaela Melania Aghirculesei**
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-aghirculesei.pages.dev-orange?style=flat)](https://aghirculesei.pages.dev/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-aghirculesei.de-orange?style=flat)](https://aghirculesei.de/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/mihaela-aghirculesei-84147a23b/)
 [![GitHub](https://img.shields.io/badge/GitHub-MihaelaAghirculesei-181717?style=flat&logo=github)](https://github.com/MihaelaAghirculesei)
 [![Email](https://img.shields.io/badge/Email-aghirculesei%40gmail.com-D14836?style=flat&logo=gmail)](mailto:aghirculesei@gmail.com)
